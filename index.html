@@ -1,0 +1,707 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Aishwarya Sonawane</title>
+<meta name="description" content="Aishwarya Sonawane — working student in digital transformation, analytics & product strategy based in Stuttgart, Germany.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;0,9..40,700;1,9..40,400&family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;0,6..72,600;1,6..72,400;1,6..72,500&display=swap" rel="stylesheet">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.min.js"></script>
+<style>
+:root{
+  --bg:#0B0B0D;--s1:#131316;--s2:#1A1A1F;--s3:#222228;
+  --b1:#2A2A32;--b2:#3A3A44;
+  --t1:#EDECEA;--t2:#A0A0AC;--t3:#6A6A78;--t4:#4A4A56;
+  --ac:#CFA64E;--ac2:#E8C36A;--ac-g:rgba(207,166,78,.12);
+  --bl:#5B8DEF;--gn:#4ADE80;--rd:#F87171;--pr:#A78BFA;--or:#FB923C;--cy:#22D3EE;
+  --f:'DM Sans',sans-serif;--fs:'Newsreader',Georgia,serif;
+  --r:12px;--rs:8px;
+}
+*{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{background:var(--bg);color:var(--t1);font-family:var(--f);overflow-x:hidden;font-size:15px;line-height:1.6}
+img{max-width:100%;display:block}
+a{color:inherit;text-decoration:none}
+button{font-family:var(--f);cursor:pointer}
+::-webkit-scrollbar{width:5px}
+::-webkit-scrollbar-thumb{background:var(--b1);border-radius:3px}
+::selection{background:var(--ac);color:var(--bg)}
+
+/* Grain overlay */
+body::before{content:'';position:fixed;inset:0;pointer-events:none;z-index:9999;
+  background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  opacity:.03}
+
+@keyframes fadeUp{from{opacity:0;transform:translateY(24px)}to{opacity:1;transform:translateY(0)}}
+@keyframes fadeIn{from{opacity:0}to{opacity:1}}
+@keyframes pulse{0%,100%{opacity:1}50%{opacity:.4}}
+.seen{animation:fadeUp .6s ease both}
+
+/* NAV */
+nav{position:fixed;top:0;left:0;right:0;z-index:100;transition:all .3s}
+nav.scrolled{background:rgba(11,11,13,.9);backdrop-filter:blur(14px);border-bottom:1px solid var(--b1)}
+.nav-in{max-width:1080px;margin:0 auto;padding:15px 28px;display:flex;justify-content:space-between;align-items:center}
+.nav-logo{font-weight:700;font-size:15px}.nav-logo span{color:var(--ac)}
+.nav-links{display:flex;gap:24px}
+.nav-links a{color:var(--t3);font-size:13px;font-weight:500;transition:color .2s}
+.nav-links a:hover{color:var(--ac)}
+
+/* STATUS BAR */
+.status-bar{background:var(--s1);border-bottom:1px solid var(--b1);padding:8px 0;font-size:11px;color:var(--t3);text-align:center;letter-spacing:.3px;margin-top:52px}
+.status-bar span{color:var(--ac);font-weight:600}
+
+/* CONTAINERS */
+.wrap{max-width:1080px;margin:0 auto;padding:0 28px}
+.sec{padding:80px 0}
+
+/* HERO */
+.hero{min-height:92vh;display:flex;align-items:center;padding:80px 0 60px;position:relative;overflow:hidden}
+.hero-glow{position:absolute;top:10%;right:0;width:500px;height:500px;background:radial-gradient(circle,rgba(207,166,78,.05) 0%,transparent 70%);border-radius:50%;filter:blur(80px);pointer-events:none}
+.hero-grid{display:grid;grid-template-columns:1fr 340px;gap:60px;align-items:center}
+.hero-tag{font-size:12px;color:var(--t3);letter-spacing:1.5px;text-transform:uppercase;margin-bottom:12px}
+.hero h1{font-size:clamp(38px,5.5vw,58px);font-weight:700;font-family:var(--fs);line-height:1.1;margin-bottom:20px;letter-spacing:-.5px}
+.hero h1 em{font-style:italic;color:var(--ac);font-weight:500}
+.hero-text{font-size:16px;color:var(--t2);line-height:1.75;margin-bottom:28px;max-width:480px}
+.hero-badges{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:36px}
+.badge{display:inline-block;padding:4px 11px;border-radius:20px;font-size:11px;font-weight:600;letter-spacing:.4px}
+.badge-ac{background:var(--ac-g);color:var(--ac);border:1px solid rgba(207,166,78,.2)}
+.hero-btns{display:flex;gap:12px}
+.btn-p{padding:12px 28px;background:var(--ac);color:var(--bg);border-radius:var(--rs);font-weight:600;font-size:14px;border:none;transition:all .2s}
+.btn-p:hover{box-shadow:0 8px 24px rgba(207,166,78,.25);transform:translateY(-2px)}
+.btn-s{padding:12px 28px;background:transparent;color:var(--t1);border:1px solid var(--b1);border-radius:var(--rs);font-size:14px;transition:all .2s}
+.btn-s:hover{border-color:var(--ac);color:var(--ac)}
+
+/* PHOTO */
+.hero-photo{position:relative}
+.hero-photo img{width:280px;height:340px;object-fit:cover;object-position:center top;border-radius:16px;border:2px solid var(--b1)}
+.hero-photo::after{content:'';position:absolute;inset:-8px;border:1px solid var(--b1);border-radius:20px;pointer-events:none}
+.photo-caption{font-size:11px;color:var(--t4);text-align:center;margin-top:14px;font-style:italic}
+
+/* ABOUT */
+.about-layout{display:grid;grid-template-columns:1.4fr 1fr;gap:48px}
+.about-text{font-size:15px;color:var(--t2);line-height:1.8}
+.about-text p{margin-bottom:16px}
+.about-text .highlight{color:var(--t1);font-weight:500}
+.aside-card{background:var(--s1);border:1px solid var(--b1);border-radius:var(--r);padding:22px;height:fit-content}
+.aside-card h4{font-size:11px;color:var(--ac);font-weight:600;text-transform:uppercase;letter-spacing:1.2px;margin-bottom:14px}
+.aside-row{display:flex;justify-content:space-between;padding:8px 0;font-size:13px;border-bottom:1px solid rgba(42,42,50,.25)}
+.aside-row:last-child{border:none}
+.aside-k{color:var(--t3)}.aside-v{font-weight:500}
+
+/* OFF-WORK */
+.offwork{margin-top:24px;padding:18px 22px;background:var(--s2);border-radius:var(--rs);border:1px solid var(--b1)}
+.offwork h5{font-size:11px;color:var(--ac);font-weight:600;text-transform:uppercase;letter-spacing:1px;margin-bottom:10px}
+.offwork p{font-size:13px;color:var(--t2);line-height:1.7}
+
+/* SECTION HEADERS */
+.sec-tag{font-size:11px;color:var(--ac);text-transform:uppercase;letter-spacing:2.5px;font-weight:600;margin-bottom:8px}
+.sec-title{font-size:30px;font-weight:700;font-family:var(--fs);line-height:1.25;margin-bottom:10px}
+.sec-desc{font-size:15px;color:var(--t2);max-width:540px;line-height:1.65;margin-bottom:36px}
+
+/* PROJECT CARDS */
+.proj-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:14px}
+.proj-card{background:var(--s1);border:1px solid var(--b1);border-radius:var(--r);padding:24px;cursor:pointer;transition:all .25s;position:relative;overflow:hidden}
+.proj-card:hover{border-color:rgba(207,166,78,.3);transform:translateY(-3px);box-shadow:0 10px 28px rgba(0,0,0,.3)}
+.proj-card .glow{position:absolute;top:-20px;right:-20px;width:80px;height:80px;border-radius:50%;pointer-events:none}
+.proj-card .tag{font-size:10px;font-weight:600;letter-spacing:.5px;text-transform:uppercase;margin-bottom:10px;display:inline-block;padding:2px 8px;border-radius:12px}
+.proj-card h3{font-size:18px;font-weight:700;font-family:var(--fs);margin-bottom:3px}
+.proj-card .sub{font-size:12px;color:var(--t3);margin-bottom:14px}
+.proj-card .tools{display:flex;gap:5px;flex-wrap:wrap}
+.proj-card .tool{padding:2px 7px;border-radius:4px;font-size:10px;background:var(--bg);color:var(--t3);border:1px solid var(--b1)}
+.proj-card .personal-tag{position:absolute;top:12px;right:12px;font-size:9px;color:var(--or);background:rgba(251,146,60,.1);border:1px solid rgba(251,146,60,.2);padding:2px 6px;border-radius:8px;font-weight:600}
+
+/* MODAL */
+.modal-bg{position:fixed;inset:0;z-index:200;background:rgba(0,0,0,.75);backdrop-filter:blur(10px);display:flex;justify-content:center;align-items:center;padding:20px;opacity:0;pointer-events:none;transition:opacity .25s}
+.modal-bg.on{opacity:1;pointer-events:all}
+.modal{background:var(--s1);border-radius:16px;width:100%;max-width:960px;max-height:90vh;overflow-y:auto;border:1px solid var(--b1);transform:translateY(16px);transition:transform .3s}
+.modal-bg.on .modal{transform:translateY(0)}
+.modal-hd{padding:18px 22px;border-bottom:1px solid var(--b1);display:flex;justify-content:space-between;align-items:center;position:sticky;top:0;background:var(--s1);z-index:10}
+.modal-hd h3{font-size:20px;font-weight:700;font-family:var(--fs);margin-top:6px}
+.modal-x{background:var(--s2);border:1px solid var(--b1);border-radius:50%;width:34px;height:34px;color:var(--t3);font-size:18px;display:flex;align-items:center;justify-content:center;transition:all .2s}
+.modal-x:hover{border-color:var(--ac);color:var(--ac)}
+.modal-bd{padding:22px}
+.demo-tag{font-size:10px;color:var(--ac);text-transform:uppercase;letter-spacing:1.5px;font-weight:600;margin-bottom:12px}
+.case-grid{display:grid;grid-template-columns:1fr 1fr 1fr;gap:14px;margin-top:28px}
+.case-card{background:var(--s2);border-radius:var(--rs);padding:16px;border:1px solid var(--b1)}
+.case-card .ic{font-size:18px;margin-bottom:6px}
+.case-card .lb{font-size:11px;color:var(--ac);font-weight:600;text-transform:uppercase;letter-spacing:.5px;margin-bottom:6px}
+.case-card p{font-size:12.5px;color:var(--t2);line-height:1.65}
+
+/* DEMO SHARED */
+.demo-box{background:var(--bg);border-radius:var(--r);padding:18px;border:1px solid var(--b1)}
+.demo-box h4{font-size:16px;font-weight:600;margin-bottom:16px}
+.kpi-row{display:flex;gap:10px;margin-bottom:18px;flex-wrap:wrap}
+.kpi{background:var(--s1);border:1px solid var(--b1);border-radius:var(--rs);padding:12px 16px;flex:1;min-width:120px}
+.kpi .lb{font-size:10px;color:var(--t3);text-transform:uppercase;letter-spacing:.5px;margin-bottom:4px}
+.kpi .val{font-size:20px;font-weight:700}
+.kpi .ch{font-size:11px;margin-top:2px}
+.chart-row{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-bottom:14px}
+.chart-bx{background:var(--s1);border-radius:var(--rs);padding:14px;border:1px solid var(--b1)}
+.chart-bx .ct{font-size:12px;color:var(--t3);margin-bottom:10px}
+.chart-bx canvas{width:100%!important}
+.chart-fl{background:var(--s1);border-radius:var(--rs);padding:14px;border:1px solid var(--b1)}
+.chart-fl .ct{font-size:12px;color:var(--t3);margin-bottom:10px}
+.tab-g{display:flex;gap:6px}
+.tab-b{padding:7px 16px;border-radius:18px;border:1px solid var(--b1);background:transparent;color:var(--t3);font-size:12px;font-weight:500;transition:all .2s}
+.tab-b.on{border-color:var(--ac);background:var(--ac-g);color:var(--ac)}
+
+/* AI CHAT */
+.chat-c{background:var(--bg);border-radius:var(--r);border:1px solid var(--b1);height:440px;display:flex;flex-direction:column}
+.chat-hd{padding:10px 16px;border-bottom:1px solid var(--b1);display:flex;align-items:center;gap:8px;font-size:13px;font-weight:600}
+.chat-dot{width:7px;height:7px;border-radius:50%;background:var(--gn);box-shadow:0 0 6px rgba(74,222,128,.4)}
+.chat-msgs{flex:1;overflow-y:auto;padding:16px;display:flex;flex-direction:column;gap:10px}
+.chat-empty{flex:1;display:flex;flex-direction:column;justify-content:center;align-items:center;gap:12px}
+.prompt-b{background:var(--s1);border:1px solid var(--b1);border-radius:var(--rs);padding:9px 12px;color:var(--t1);font-size:12px;cursor:pointer;text-align:left;width:100%;transition:all .2s}
+.prompt-b:hover{border-color:var(--ac);background:var(--s2)}
+.msg{max-width:82%;padding:9px 13px;border-radius:11px;font-size:12.5px;line-height:1.6;white-space:pre-wrap;word-wrap:break-word}
+.msg-u{align-self:flex-end;background:rgba(207,166,78,.1);border:1px solid rgba(207,166,78,.2);color:var(--ac)}
+.msg-a{align-self:flex-start;background:var(--s1);border:1px solid var(--b1)}
+.msg-t{align-self:flex-start;padding:9px 13px;background:var(--s1);border:1px solid var(--b1);border-radius:11px;font-size:12px;color:var(--t3)}
+.msg-t span{animation:pulse 1.2s infinite}
+.chat-in{padding:10px 14px;border-top:1px solid var(--b1);display:flex;gap:8px}
+.chat-input{flex:1;background:var(--s1);border:1px solid var(--b1);border-radius:var(--rs);padding:9px 12px;color:var(--t1);font-size:12px;outline:none;font-family:var(--f)}
+.chat-input:focus{border-color:var(--ac)}
+.chat-send{background:var(--ac);color:var(--bg);border:none;border-radius:var(--rs);padding:9px 18px;font-weight:600;font-size:12px}
+
+/* SLIDERS */
+.sl-grp{background:var(--s1);border-radius:var(--rs);padding:14px;border:1px solid var(--b1);margin-bottom:14px}
+.sl-grp h5{font-size:12px;font-weight:600;color:var(--ac);margin-bottom:12px}
+.sl-item{margin-bottom:12px}.sl-item:last-child{margin-bottom:0}
+.sl-lbl{display:flex;justify-content:space-between;margin-bottom:5px;font-size:11px}
+.sl-lbl span{color:var(--t3)}.sl-lbl strong{color:var(--ac);font-size:12px}
+input[type=range]{width:100%;accent-color:var(--ac);height:3px;-webkit-appearance:none;background:var(--b1);border-radius:2px;outline:none}
+input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;width:13px;height:13px;border-radius:50%;background:var(--ac);cursor:pointer}
+.verdict-bx{border-radius:var(--rs);padding:12px;text-align:center;margin-bottom:14px}
+.bc-grid{display:grid;grid-template-columns:1fr 1fr;gap:18px}
+.kpi-grid-2{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-bottom:14px}
+
+/* KANBAN */
+.kanban{display:grid;grid-template-columns:repeat(4,1fr);gap:8px}
+.kan-hd{display:flex;align-items:center;gap:5px;margin-bottom:8px;padding:5px 0}
+.kan-hd .dot{width:7px;height:7px;border-radius:50%}
+.kan-hd span{font-size:11px;font-weight:600;text-transform:uppercase;letter-spacing:.4px}
+.kan-hd .cnt{font-size:10px;color:var(--t3);margin-left:auto}
+.kan-card{background:var(--s1);border:1px solid var(--b1);border-radius:var(--rs);padding:9px 11px;margin-bottom:5px;transition:all .15s}
+.kan-card:hover{border-color:rgba(207,166,78,.25)}
+.kan-card .tl{font-size:11px;font-weight:500;margin-bottom:5px;line-height:1.4}
+.kan-card .mt{display:flex;justify-content:space-between;align-items:center}
+.kan-card .pt{font-size:9px;color:var(--t3)}
+.kan-mv{background:none;border:1px solid var(--b1);border-radius:3px;color:var(--t3);font-size:9px;padding:1px 5px;transition:all .15s}
+.kan-mv:hover{border-color:var(--ac);color:var(--ac)}
+
+/* BLOG */
+.blog-grid{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+.blog-card{background:var(--s1);border:1px solid var(--b1);border-radius:var(--r);padding:28px;transition:all .25s}
+.blog-card:hover{border-color:rgba(207,166,78,.25);transform:translateY(-2px)}
+.blog-card .date{font-size:11px;color:var(--t4);margin-bottom:8px}
+.blog-card h3{font-size:18px;font-weight:600;font-family:var(--fs);margin-bottom:8px;line-height:1.3}
+.blog-card .excerpt{font-size:13px;color:var(--t2);line-height:1.7;margin-bottom:16px}
+.blog-card .read-more{font-size:12px;color:var(--ac);font-weight:600;letter-spacing:.3px}
+.blog-expand{display:none;margin-top:16px;padding-top:16px;border-top:1px solid var(--b1)}
+.blog-expand.open{display:block}
+.blog-expand p{font-size:13.5px;color:var(--t2);line-height:1.8;margin-bottom:14px}
+.blog-expand .hl{color:var(--t1);font-weight:500}
+
+/* SKILLS */
+.skills-flex{display:grid;grid-template-columns:repeat(4,1fr);gap:14px;margin-bottom:28px}
+.sk-card{background:var(--s1);border-radius:var(--r);padding:18px;border:1px solid var(--b1)}
+.sk-card h4{font-size:11px;color:var(--ac);font-weight:600;text-transform:uppercase;letter-spacing:1px;margin-bottom:12px}
+.sk-item{font-size:12.5px;color:var(--t2);display:flex;align-items:center;gap:7px;padding:3px 0}
+.sk-dot{width:3px;height:3px;border-radius:50%;background:var(--ac);flex-shrink:0}
+.certs-bx{background:var(--s1);border-radius:var(--r);padding:22px;border:1px solid var(--b1)}
+.certs-bx h4{font-size:11px;color:var(--ac);font-weight:600;text-transform:uppercase;letter-spacing:1px;margin-bottom:14px}
+.cert-tags{display:flex;flex-wrap:wrap;gap:7px}
+.cert-t{padding:5px 12px;border-radius:18px;font-size:11px;background:var(--bg);color:var(--t3);border:1px solid var(--b1)}
+
+/* CONTACT */
+.contact-flex{display:flex;gap:14px;flex-wrap:wrap}
+.con-card{background:var(--s1);border:1px solid var(--b1);border-radius:var(--r);padding:14px 20px;flex:1 1 200px;transition:all .2s}
+.con-card:hover{border-color:rgba(207,166,78,.3)}
+.con-card .lb{font-size:10px;color:var(--t3);text-transform:uppercase;letter-spacing:.5px;margin-bottom:3px}
+.con-card .vl{font-size:13px;font-weight:500}
+
+footer{border-top:1px solid var(--b1);padding:24px 28px;text-align:center}
+footer p{font-size:11px;color:var(--t4)}
+
+@media(max-width:800px){
+  .hero-grid,.about-layout,.bc-grid,.chart-row,.case-grid,.blog-grid{grid-template-columns:1fr}
+  .proj-grid{grid-template-columns:1fr 1fr}
+  .skills-flex{grid-template-columns:1fr 1fr}
+  .kanban{grid-template-columns:1fr 1fr}
+  .hero-photo{display:none}
+  .hero h1{font-size:34px}
+}
+@media(max-width:500px){
+  .proj-grid,.skills-flex,.kanban{grid-template-columns:1fr}
+}
+</style>
+</head>
+<body>
+
+<nav id="navbar"><div class="nav-in">
+  <div class="nav-logo"><span>A</span>S</div>
+  <div class="nav-links">
+    <a href="#about">About</a><a href="#projects">Projects</a>
+    <a href="#writing">Writing</a><a href="#skills">Skills</a><a href="#contact">Contact</a>
+  </div>
+</div></nav>
+
+<div class="status-bar">
+  <span>☕</span> Currently exploring: how data flows through digital products &nbsp;·&nbsp; <span>📍</span> Stuttgart, DE &nbsp;·&nbsp; <span>🎵</span> Probably listening to music right now
+</div>
+
+<!-- HERO -->
+<section class="hero"><div class="wrap"><div class="hero-grid">
+  <div>
+    <div class="hero-tag">Hey, I'm Aishwarya</div>
+    <h1>I turn messy data into<br><em>clear decisions</em></h1>
+    <p class="hero-text">Working student based in Stuttgart. I spend my days building dashboards, wrangling spreadsheets, and figuring out how digital transformation actually works inside large companies. Previously did the same in India — now doing it in Germany.</p>
+    <div class="hero-badges">
+      <span class="badge badge-ac">Analytics & Dashboards</span>
+      <span class="badge badge-ac">Product Strategy</span>
+      <span class="badge badge-ac">AI Tools</span>
+      <span class="badge badge-ac">Project Management</span>
+    </div>
+    <div class="hero-btns">
+      <a href="#projects" class="btn-p">See my work</a>
+      <a href="#contact" class="btn-s">Say hello</a>
+    </div>
+  </div>
+  <div class="hero-photo">
+    <img id="heroImg" alt="Aishwarya Sonawane" />
+    <div class="photo-caption">Stuttgart, 2026</div>
+  </div>
+</div></div><div class="hero-glow"></div></section>
+
+<!-- ABOUT -->
+<section id="about" class="sec"><div class="wrap">
+  <div class="sec-tag">About me</div>
+  <div class="sec-title">The short version</div>
+  <div class="about-layout" style="margin-top:20px">
+    <div class="about-text">
+      <p>I moved from India to Germany because I was curious about how companies here think about engineering, technology, and building things. Not just the precision everyone talks about — but the actual process of how large organizations make decisions and ship products.</p>
+      <p>Over the past 3+ years, I've worked at <span class="highlight">smart Europe</span> in Stuttgart, <span class="highlight">Sedris Vision</span> in Berlin, <span class="highlight">SKF India</span>, and <span class="highlight">Hero MotoCorp</span>. The common thread? I end up being the person who takes a messy situation — scattered data, unclear processes, too many stakeholders with different opinions — and turns it into something structured and actionable.</p>
+      <p>What I enjoy most is <span class="highlight">the puzzle of it</span>. Talking to different teams, understanding problems from multiple angles, and slowly bringing structure to chaos. There's something satisfying about a well-organized spreadsheet or a dashboard that actually answers the right questions.</p>
+      <p>Right now, I'm especially curious about how data, product thinking, and AI come together inside modern companies. Not just the hype — the actual mechanics of how teams build digital products and make decisions with analytics.</p>
+    </div>
+    <div>
+      <div class="aside-card">
+        <h4>Quick facts</h4>
+        <div class="aside-row"><span class="aside-k">Based in</span><span class="aside-v">Stuttgart, Germany</span></div>
+        <div class="aside-row"><span class="aside-k">Studying</span><span class="aside-v">M.Eng. (2025–2027)</span></div>
+        <div class="aside-row"><span class="aside-k">Experience</span><span class="aside-v">3+ years</span></div>
+        <div class="aside-row"><span class="aside-k">Languages</span><span class="aside-v">EN · DE (B2) · Hindi</span></div>
+        <div class="aside-row"><span class="aside-k">Available</span><span class="aside-v">20 hrs/week</span></div>
+      </div>
+      <div class="offwork">
+        <h5>When I'm not working</h5>
+        <p>You'll find me trying to cook something new (Indian food mostly, but experimenting with German and Italian lately), exploring cities on weekends, or making playlists that are way too long. Stuttgart's food scene is underrated — still discovering it.</p>
+      </div>
+    </div>
+  </div>
+</div></section>
+
+<!-- PROJECTS -->
+<section id="projects" class="sec" style="background:var(--s1);border-top:1px solid var(--b1);border-bottom:1px solid var(--b1);padding:80px 0"><div class="wrap">
+  <div class="sec-tag">Projects</div>
+  <div class="sec-title">Things I've built</div>
+  <div class="sec-desc">A mix of work projects, tools I made for myself, and experiments. Each one has a working demo you can play with — click any card to open it.</div>
+  <div class="proj-grid" id="projGrid"></div>
+</div></section>
+
+<!-- MODAL -->
+<div class="modal-bg" id="modalBg">
+  <div class="modal"><div class="modal-hd"><div id="mHd"></div><button class="modal-x" onclick="closeM()">×</button></div><div class="modal-bd" id="mBd"></div></div>
+</div>
+
+<!-- WRITING -->
+<section id="writing" class="sec"><div class="wrap">
+  <div class="sec-tag">Writing</div>
+  <div class="sec-title">Some things I think about</div>
+  <div class="sec-desc">Not a blog, just occasional thoughts on tech, career, and figuring things out.</div>
+  <div class="blog-grid">
+    <div class="blog-card" onclick="toggleBlog(0)">
+      <div class="date">February 2026</div>
+      <h3>AI tools I actually use vs the ones that are overhyped</h3>
+      <div class="excerpt">After a year of trying every AI tool that crossed my LinkedIn feed, here's what actually stuck in my workflow — and what turned out to be mostly marketing.</div>
+      <div class="read-more" id="blogBtn0">Read more ↓</div>
+      <div class="blog-expand" id="blog0">
+        <p>Let me be honest: I got caught up in the AI hype like everyone else. Every week there was a new tool that was supposed to "revolutionize" something. I signed up for most of them.</p>
+        <p>A year later, here's what I actually use daily: <span class="hl">ChatGPT</span> for drafting, brainstorming, and rubber-ducking problems. <span class="hl">Claude</span> when I need longer, more structured thinking. <span class="hl">Excel Copilot</span> — honestly a mixed bag, sometimes helpful, sometimes makes things worse.</p>
+        <p>What turned out to be overhyped (for me at least): most "AI-powered project management" tools. They add AI labels to features that are basically search and auto-fill. The dashboards look fancy in demos but I still end up building my own in Power BI because I need specific things.</p>
+        <p>The real shift wasn't any single tool. It was learning to think in terms of <span class="hl">prompts and structured outputs</span>. Once I understood that, even basic tools became more useful. The expensive enterprise AI tools? Most of them solve problems you can solve with a well-written prompt and a spreadsheet.</p>
+        <p>This isn't a hot take — it's what I've seen working across 4 companies now. The teams that benefit from AI aren't the ones with the fanciest tools. They're the ones with clean data and clear processes to begin with.</p>
+      </div>
+    </div>
+    <div class="blog-card" onclick="toggleBlog(1)">
+      <div class="date">January 2026</div>
+      <h3>What I learned switching from engineering to business</h3>
+      <div class="excerpt">I studied mechanical engineering. Now I work in digital transformation and product strategy. The transition wasn't as dramatic as it sounds — but some things surprised me.</div>
+      <div class="read-more" id="blogBtn1">Read more ↓</div>
+      <div class="blog-expand" id="blog1">
+        <p>People keep asking me: "Why did you switch from engineering?" The honest answer is that I didn't really switch. I just moved from one end of the building process to another.</p>
+        <p>In engineering, you learn to break complex problems into smaller pieces, test assumptions, and iterate. That's literally what product management and project coordination are. The vocabulary changed. The thinking didn't.</p>
+        <p>What surprised me was how much of business runs on <span class="hl">spreadsheets and presentations</span>. I expected sophisticated systems. What I found was that the person who could build a clean Excel model and present it clearly had more influence than the person with the fanciest MBA framework.</p>
+        <p>The hardest part wasn't learning new tools — it was learning to be comfortable with ambiguity. Engineering has right answers. Business has "good enough for now, let's test it" answers. That took some getting used to.</p>
+        <p>My advice for other engineers thinking about this move: <span class="hl">your analytical thinking is your superpower</span>. Don't try to become a different person. Just apply the same rigour to different problems. And learn Excel. Seriously. Learn it well.</p>
+      </div>
+    </div>
+  </div>
+</div></section>
+
+<!-- SKILLS -->
+<section id="skills" class="sec" style="background:var(--s1);border-top:1px solid var(--b1);border-bottom:1px solid var(--b1);padding:80px 0"><div class="wrap">
+  <div class="sec-tag">Skills</div>
+  <div class="sec-title" style="margin-bottom:28px">What I work with</div>
+  <div class="skills-flex">
+    <div class="sk-card"><h4>Analytics</h4>
+      <div class="sk-item"><div class="sk-dot"></div>Excel (Advanced — pivot, macros, VBA)</div>
+      <div class="sk-item"><div class="sk-dot"></div>Power BI</div>
+      <div class="sk-item"><div class="sk-dot"></div>Tableau</div>
+      <div class="sk-item"><div class="sk-dot"></div>SAP Analytics</div>
+      <div class="sk-item"><div class="sk-dot"></div>Python (Pandas, Matplotlib)</div>
+      <div class="sk-item"><div class="sk-dot"></div>SQL</div>
+    </div>
+    <div class="sk-card"><h4>Platforms</h4>
+      <div class="sk-item"><div class="sk-dot"></div>SAP BTP</div>
+      <div class="sk-item"><div class="sk-dot"></div>Jira</div>
+      <div class="sk-item"><div class="sk-dot"></div>Figma</div>
+      <div class="sk-item"><div class="sk-dot"></div>Confluence</div>
+      <div class="sk-item"><div class="sk-dot"></div>SharePoint</div>
+      <div class="sk-item"><div class="sk-dot"></div>MS Office Suite</div>
+    </div>
+    <div class="sk-card"><h4>AI & Dev</h4>
+      <div class="sk-item"><div class="sk-dot"></div>Generative AI / LLMs</div>
+      <div class="sk-item"><div class="sk-dot"></div>Prompt Engineering</div>
+      <div class="sk-item"><div class="sk-dot"></div>Agile / Scrum</div>
+      <div class="sk-item"><div class="sk-dot"></div>SDLC basics</div>
+      <div class="sk-item"><div class="sk-dot"></div>Git</div>
+    </div>
+    <div class="sk-card"><h4>Strategy</h4>
+      <div class="sk-item"><div class="sk-dot"></div>Business Case Building</div>
+      <div class="sk-item"><div class="sk-dot"></div>Market Sizing</div>
+      <div class="sk-item"><div class="sk-dot"></div>Competitive Analysis</div>
+      <div class="sk-item"><div class="sk-dot"></div>Change Management</div>
+      <div class="sk-item"><div class="sk-dot"></div>Stakeholder Management</div>
+    </div>
+  </div>
+  <div class="certs-bx">
+    <h4>Certifications</h4>
+    <div class="cert-tags">
+      <span class="cert-t">Google Project Management Certificate</span>
+      <span class="cert-t">SAP BTP Fundamentals</span>
+      <span class="cert-t">Microsoft Excel Advanced — Macros & VBA</span>
+      <span class="cert-t">Generative AI for Everyone (DeepLearning.AI)</span>
+      <span class="cert-t">Agile with Atlassian Jira</span>
+    </div>
+  </div>
+</div></section>
+
+<!-- CONTACT -->
+<section id="contact" class="sec" style="padding-bottom:100px"><div class="wrap">
+  <div class="sec-tag">Contact</div>
+  <div class="sec-title">Let's talk</div>
+  <div class="sec-desc">I'm looking for Werkstudent roles in product management, project management, business development, analytics, AI/ML, and cloud. If you're hiring — or just want to chat — reach out.</div>
+  <div class="contact-flex">
+    <a href="mailto:aishwarya.harz@gmail.com" class="con-card"><div class="lb">Email</div><div class="vl">aishwarya.harz@gmail.com</div></a>
+    <a href="tel:+4915563481744" class="con-card"><div class="lb">Phone</div><div class="vl">+49 155 63481744</div></a>
+    <a href="https://linkedin.com/in/aishwarya-sonawane" target="_blank" class="con-card"><div class="lb">LinkedIn</div><div class="vl">linkedin.com/in/aishwarya-sonawane</div></a>
+    <a href="https://github.com/aishwaryasanjaysonawane-a11y" target="_blank" class="con-card"><div class="lb">GitHub</div><div class="vl">aishwaryasanjaysonawane-a11y</div></a>
+  </div>
+</div></section>
+
+<footer><p>Made by Aishwarya · Stuttgart 2026 · probably should be studying right now</p></footer>
+
+<script>
+// PHOTO - load from same directory
+document.getElementById("heroImg").src = "photo.jpeg";
+
+// SCROLL NAV
+window.addEventListener("scroll",()=>{document.getElementById("navbar").classList.toggle("scrolled",window.scrollY>50)});
+
+// SCROLL REVEAL
+const obs=new IntersectionObserver(es=>{es.forEach(e=>{if(e.isIntersecting)e.target.classList.add("seen")})},{threshold:.08});
+document.querySelectorAll(".sec, .proj-card, .blog-card, .sk-card").forEach(el=>obs.observe(el));
+
+// BLOG TOGGLE
+function toggleBlog(i){
+  const el=document.getElementById("blog"+i);
+  const btn=document.getElementById("blogBtn"+i);
+  if(el.classList.contains("open")){el.classList.remove("open");btn.textContent="Read more ↓"}
+  else{el.classList.add("open");btn.textContent="Collapse ↑"}
+}
+
+// ============================================================
+// PROJECTS DATA — 8 projects
+// ============================================================
+const P=[
+  {id:"dashboard",tag:"Data & Analytics",title:"Market Pulse",sub:"Global Learning Delivery Dashboard",color:"#CFA64E",
+   tools:["Excel","Power BI","SAP Analytics","Python"],
+   context:"At work, I kept seeing the same problem: delivery teams across EMEA, APAC, and Americas were each running their own Excel reports. Numbers didn't match, nobody trusted the data, and monthly reviews took days of prep.",
+   approach:"I built a unified dashboard pulling from SAP Enterprise Analytics and Excel sources. Added interactive filters for region and period, KPI cards that actually answer the questions leaders ask, and charts comparing digital vs instructor-led delivery.",
+   impact:"Reporting went from 2 days to 15 minutes. Three regional heads adopted it. The biggest win? People actually started trusting the numbers in meetings."},
+
+  {id:"ai",tag:"AI / ML",title:"AI Strategy Assistant",sub:"LLM-Powered Market Analysis Tool",color:"#5B8DEF",
+   tools:["Generative AI","Python","Prompt Engineering","SAP BTP"],
+   context:"Strategy requests kept coming in: 'size this market,' 'compare us to Salesforce,' 'recommend KPIs.' Each one took 3-5 hours and the quality was inconsistent depending on who did it.",
+   approach:"Built a prompt-based tool that generates structured market analyses, competitive matrices, and KPI frameworks. Not magic — just well-designed prompts with consistent output formats. Integrated with SAP BTP for enterprise data context.",
+   impact:"Turnaround dropped from 4 hours to 10 minutes. More importantly, output quality became consistent regardless of who ran the analysis. Team asked to expand it into a customer-facing tool."},
+
+  {id:"strategy",tag:"Product Strategy",title:"Launch Playbook",sub:"Business Case Calculator",color:"#4ADE80",
+   tools:["Excel (Macros)","Financial Modeling","SAP Cloud","Figma"],
+   context:"Product teams were making launch decisions based on vibes. 'The market feels big' isn't a business case. There was no standard framework for evaluating whether a new cloud product was worth pursuing.",
+   approach:"Created an interactive calculator with configurable inputs: TAM, market share, pricing, CAC, churn. It auto-calculates LTV:CAC, payback period, and generates a Go/No-Go verdict. Added 5-year revenue projections.",
+   impact:"Two product teams adopted it for cloud solution launches. Cut business case prep from 8+ hours to under 2. The Go/No-Go framework became the standard for the business unit."},
+
+  {id:"sprint",tag:"Project Management",title:"Sprint Command",sub:"Agile Sprint Dashboard",color:"#A78BFA",
+   tools:["Jira","Agile/Scrum","Confluence","SharePoint"],
+   context:"We had 4 concurrent sprints running across Germany and India. Sprint health was scattered across Jira boards, Slack threads, and weekly emails. Standups took 45 minutes because nobody had the full picture.",
+   approach:"Designed a unified sprint dashboard: Kanban board with priority color-coding, one-click status transitions, burndown chart, and velocity tracking. All fed from Jira data with Confluence docs linked.",
+   impact:"Sprint completion rate went from 72% to 89%. Standups dropped to 15 minutes. The board became the single source of truth for 4 cross-functional teams."},
+
+  {id:"excel",tag:"Excel Automation",title:"The Spreadsheet That Saved 40 Hours",sub:"Macro-Powered Reporting at Hero MotoCorp",color:"#FB923C",
+   tools:["Excel","VBA Macros","Pivot Tables","SAP"],personal:true,
+   context:"At Hero MotoCorp, I inherited a monthly pricing report that took 2 people nearly a full week to compile. It pulled from 6 different SAP extracts, had manual copy-paste steps everywhere, and broke constantly.",
+   approach:"Rebuilt the entire workbook with VBA macros for automated data import, dynamic pivot tables, conditional formatting for anomalies, and a one-click refresh button. Added validation checks so errors get caught before they reach leadership.",
+   impact:"Monthly report time dropped from 40+ hours to about 3. Two people got their week back. The template was adopted by 3 other business units. Sometimes the boring solution is the best solution."},
+
+  {id:"smart",tag:"Case Study",title:"smart Europe Internship",sub:"Digitalization of Internal Workflows",color:"#22D3EE",
+   tools:["Jira","Figma","Confluence","SharePoint","Excel"],
+   context:"smart Europe's internal teams were using a patchwork of tools — some processes lived in email, some in SharePoint, some in nobody's memory. I joined the digital transformation team to help make sense of it.",
+   approach:"Mapped out existing workflows through stakeholder interviews (50+ people). Built documentation in Confluence, created tracking dashboards in Excel, and helped design wireframes in Figma for new digital touchpoints. Coordinated action items across Product, IT, and Operations.",
+   impact:"Delivered 10+ documentation assets per quarter. Reduced manual status updates by 30% through Excel automation. The workflow mapping became the foundation for a larger digitalization initiative."},
+
+  {id:"dataviz",tag:"Data Visualization",title:"India → Germany",sub:"My Career Journey as an Infographic",color:"#A78BFA",
+   tools:["Figma","Python","Matplotlib","Storytelling"],personal:true,
+   context:"I wanted a way to visually tell my career story for portfolio reviews and networking events — something more engaging than a linear CV.",
+   approach:"Created an interactive timeline showing my path from engineering in Pune to digital transformation in Stuttgart. Each stop includes key learnings, skills acquired, and metrics. Built with data viz principles: clear hierarchy, consistent color coding, progressive disclosure.",
+   impact:"Used in 5+ networking conversations. Helped me articulate my career narrative more clearly. Turns out, showing your journey as data makes it memorable."},
+
+  {id:"stuttgart",tag:"Weekend Project",title:"Stuttgart Eats",sub:"Restaurant Finder for International Students",color:"#FB923C",
+   tools:["Python","Streamlit","Google Maps API","Web Scraping"],personal:true,
+   context:"Moving to Stuttgart, I struggled to find good restaurants that served food from home — or just honest reviews from people who actually eat there regularly instead of tourist blogs.",
+   approach:"Scraped Google Maps reviews, filtered for keywords (vegetarian, Indian, halal, budget-friendly), and built a simple Streamlit app with map view and filters. Added a 'student budget' toggle that filters for meals under €10.",
+   impact:"Shared it with my university WhatsApp group. 30+ students used it. Found my favorite Indian restaurant through my own app, which felt weirdly satisfying. It's rough around the edges but it works."},
+];
+
+// RENDER PROJECT CARDS
+const grid=document.getElementById("projGrid");
+P.forEach((p,i)=>{
+  const d=document.createElement("div");
+  d.className="proj-card";
+  d.onclick=()=>openM(p.id);
+  d.innerHTML=`
+    <div class="glow" style="background:radial-gradient(circle,${p.color}10 0%,transparent 70%)"></div>
+    ${p.personal?'<div class="personal-tag">Personal</div>':''}
+    <span class="tag" style="background:${p.color}15;color:${p.color}">${p.tag}</span>
+    <h3>${p.title}</h3>
+    <div class="sub">${p.sub}</div>
+    <div class="tools">${p.tools.map(t=>`<span class="tool">${t}</span>`).join("")}</div>
+  `;
+  grid.appendChild(d);
+});
+
+// ============================================================
+// MODAL SYSTEM
+// ============================================================
+let charts=[];
+function killCharts(){charts.forEach(c=>c.destroy());charts=[]}
+
+function openM(id){
+  killCharts();
+  const p=P.find(x=>x.id===id);
+  const bg=document.getElementById("modalBg");
+  document.getElementById("mHd").innerHTML=`<span class="tag" style="background:${p.color}15;color:${p.color}">${p.tag}</span><h3>${p.title}</h3>`;
+  let demo="";
+  if(id==="dashboard")demo=dashHTML();
+  else if(id==="ai")demo=aiHTML();
+  else if(id==="strategy")demo=bcHTML();
+  else if(id==="sprint")demo=spHTML();
+  else if(id==="excel")demo=excelHTML();
+  else if(id==="smart")demo=smartHTML();
+  else if(id==="dataviz")demo=dvHTML();
+  else if(id==="stuttgart")demo=stuttHTML();
+
+  document.getElementById("mBd").innerHTML=`
+    <div class="demo-tag">Live Demo</div>${demo}
+    <div class="case-grid">
+      <div class="case-card"><div class="ic">📋</div><div class="lb">Context</div><p>${p.context}</p></div>
+      <div class="case-card"><div class="ic">⚙️</div><div class="lb">Approach</div><p>${p.approach}</p></div>
+      <div class="case-card"><div class="ic">📈</div><div class="lb">Impact</div><p>${p.impact}</p></div>
+    </div>`;
+  bg.classList.add("on");document.body.style.overflow="hidden";
+  requestAnimationFrame(()=>{
+    if(id==="dashboard")initDash();else if(id==="ai")initAI();
+    else if(id==="strategy")initBC();else if(id==="sprint")initSp();
+    else if(id==="excel")initExcel();else if(id==="dataviz")initDV();
+  });
+}
+function closeM(){killCharts();document.getElementById("modalBg").classList.remove("on");document.body.style.overflow=""}
+document.getElementById("modalBg").addEventListener("click",e=>{if(e.target===e.currentTarget)closeM()});
+document.addEventListener("keydown",e=>{if(e.key==="Escape")closeM()});
+
+// ============================================================
+// DEMO 1: DASHBOARD
+// ============================================================
+function dashHTML(){return`<div class="demo-box">
+  <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:16px;flex-wrap:wrap;gap:8px">
+    <h4>Global Learning Delivery</h4>
+    <div class="tab-g"><button class="tab-b on" onclick="dPer(this,'q2')">Q2</button><button class="tab-b" onclick="dPer(this,'q3')">Q3</button><button class="tab-b" onclick="dPer(this,'q4')">Q4</button></div>
+  </div>
+  <div class="kpi-row">
+    <div class="kpi"><div class="lb">Enrollments</div><div class="val" style="color:var(--ac)" id="d-e">12,847</div><div class="ch" style="color:var(--gn)">+14.2%</div></div>
+    <div class="kpi"><div class="lb">Completion</div><div class="val" style="color:var(--gn)" id="d-c">78.3%</div><div class="ch" style="color:var(--gn)">+3.1pp</div></div>
+    <div class="kpi"><div class="lb">Digital</div><div class="val" style="color:var(--bl)" id="d-d">68%</div><div class="ch" style="color:var(--gn)">+5.8pp</div></div>
+    <div class="kpi"><div class="lb">NPS</div><div class="val" style="color:var(--or)" id="d-n">72</div><div class="ch" style="color:var(--rd)">-2 pts</div></div>
+  </div>
+  <div class="chart-row"><div class="chart-bx"><div class="ct">Revenue vs Target (€K)</div><canvas id="c1" height="170"></canvas></div>
+  <div class="chart-bx"><div class="ct">Delivery by Region</div><canvas id="c2" height="170"></canvas></div></div>
+  <div class="chart-fl"><div class="ct">Digital vs Instructor-Led (Weekly)</div><canvas id="c3" height="140"></canvas></div>
+</div>`}
+function dPer(b,q){b.parentElement.querySelectorAll(".tab-b").forEach(x=>x.classList.remove("on"));b.classList.add("on");
+const d={q2:{e:"11,230",c:"75.1%",d:"62%",n:"74"},q3:{e:"12,847",c:"78.3%",d:"68%",n:"72"},q4:{e:"14,102",c:"81.0%",d:"72%",n:"75"}}[q];
+document.getElementById("d-e").textContent=d.e;document.getElementById("d-c").textContent=d.c;
+document.getElementById("d-d").textContent=d.d;document.getElementById("d-n").textContent=d.n}
+function initDash(){
+  const o={responsive:true,plugins:{legend:{display:false}},scales:{x:{ticks:{color:"#4A4A56",font:{size:10}},grid:{color:"#2A2A3218"}},y:{ticks:{color:"#4A4A56",font:{size:10}},grid:{color:"#2A2A3230"}}}};
+  charts.push(new Chart(document.getElementById("c1"),{type:"line",data:{labels:["Jan","Feb","Mar","Apr","May","Jun","Jul","Aug"],datasets:[{label:"Target",data:[130,145,150,160,170,180,190,200],borderColor:"#4A4A56",borderDash:[5,3],pointRadius:0,fill:false,tension:.3},{label:"Actual",data:[142,158,137,175,189,201,195,218],borderColor:"#CFA64E",backgroundColor:"rgba(207,166,78,.08)",fill:true,pointRadius:2,pointBackgroundColor:"#CFA64E",tension:.3}]},options:o}));
+  charts.push(new Chart(document.getElementById("c2"),{type:"doughnut",data:{labels:["EMEA","APAC","Americas","Other"],datasets:[{data:[42,28,22,8],backgroundColor:["#CFA64E","#5B8DEF","#4ADE80","#A78BFA"],borderWidth:0}]},options:{responsive:true,cutout:"55%",plugins:{legend:{position:"bottom",labels:{color:"#6A6A78",font:{size:10},padding:10,usePointStyle:true,pointStyleWidth:7}}}}}));
+  charts.push(new Chart(document.getElementById("c3"),{type:"bar",data:{labels:["W1","W2","W3","W4","W5","W6"],datasets:[{label:"Digital",data:[85,92,78,105,98,112],backgroundColor:"#5B8DEF",borderRadius:3},{label:"Instructor",data:[42,38,45,40,52,48],backgroundColor:"#CFA64E",borderRadius:3}]},options:{responsive:true,plugins:{legend:{position:"top",labels:{color:"#6A6A78",font:{size:10},usePointStyle:true,pointStyleWidth:7}}},scales:{x:{ticks:{color:"#4A4A56",font:{size:10}},grid:{display:false}},y:{ticks:{color:"#4A4A56",font:{size:10}},grid:{color:"#2A2A3230"}}}}}));
+}
+
+// DEMO 2: AI CHAT
+const AIR=[
+  {q:"Analyze market entry for SAP BTP in APAC",a:"SAP BTP adoption in APAC mid-market: 23% YoY growth.\n\nKey segments:\n• Manufacturing (38% of TAM) — predictive maintenance demand\n• Retail (24%) — real-time inventory analytics\n• Financial Services (18%) — compliance automation\n\nRecommended: Partner-led model, target manufacturing first.\nExpected 6-month pipeline: €2.8M."},
+  {q:"Competitive positioning vs Salesforce",a:"SAP BTP vs Salesforce Platform:\n\nERP Integration: SAP — Native S/4HANA | SF — Needs middleware\nAI/ML: SAP — AI Core + BTP | SF — Einstein GPT\nData: SAP — HANA Cloud | SF — Data Cloud\nLow-Code: SAP Build | SF — Lightning\nPricing: Consumption-based vs Per-user\n\nSAP wins on enterprise depth. SF wins on developer ecosystem."},
+  {q:"KPIs for learning services delivery",a:"KPI Framework:\n\n1. Efficiency: Completion rate (>80%), time-to-competency, digital ratio\n2. Impact: Productivity lift, ticket reduction (-15%), cert pass rate\n3. Engagement: NPS (>70), repeat enrollment, content utilization\n\nCadence: Weekly ops + monthly executive review."},
+];
+function aiHTML(){return`<div class="chat-c" id="chatC"><div class="chat-hd"><div class="chat-dot"></div>AI Strategy Assistant<span style="font-size:10px;color:var(--t4);margin-left:auto">LLM-powered</span></div><div class="chat-msgs" id="chatM"><div class="chat-empty" id="chatE"><div style="font-size:32px">🧠</div><p style="color:var(--t3);font-size:13px">Try a prompt:</p><div style="display:flex;flex-direction:column;gap:6px;width:100%" id="chatP"></div></div></div><div class="chat-in"><input class="chat-input" id="chatI" placeholder="Ask about strategy, markets, KPIs..."><button class="chat-send" id="chatS">Send</button></div></div>`}
+function initAI(){const m=document.getElementById("chatM"),i=document.getElementById("chatI"),s=document.getElementById("chatS"),pb=document.getElementById("chatP"),emp=document.getElementById("chatE");let n=0;
+AIR.forEach(r=>{const b=document.createElement("button");b.className="prompt-b";b.textContent=r.q;b.onclick=()=>send(r.q);pb.appendChild(b)});
+function send(t){const q=t||i.value.trim();if(!q)return;i.value="";if(emp)emp.style.display="none";
+const u=document.createElement("div");u.className="msg msg-u";u.textContent=q;m.appendChild(u);
+const tp=document.createElement("div");tp.className="msg-t";tp.innerHTML="<span>Analyzing...</span>";m.appendChild(tp);m.scrollTop=m.scrollHeight;
+const res=AIR[n%AIR.length];n++;
+setTimeout(()=>{tp.remove();const a=document.createElement("div");a.className="msg msg-a";a.textContent=res.a;m.appendChild(a);m.scrollTop=m.scrollHeight},1100)}
+s.onclick=()=>send();i.onkeydown=e=>{if(e.key==="Enter")send()}}
+
+// DEMO 3: BUSINESS CASE
+function bcHTML(){return`<div class="demo-box"><h4 style="margin-bottom:16px">Business Case Calculator</h4><div class="bc-grid"><div>
+<div class="sl-grp"><h5>Market</h5>
+<div class="sl-item"><div class="sl-lbl"><span>TAM</span><strong id="bTam">€50M</strong></div><input type="range" id="sTam" min="10" max="200" value="50" oninput="uBC()"></div>
+<div class="sl-item"><div class="sl-lbl"><span>Market Share</span><strong id="bSh">8%</strong></div><input type="range" id="sSh" min="1" max="25" value="8" oninput="uBC()"></div>
+<div class="sl-item"><div class="sl-lbl"><span>Price/User/Mo</span><strong id="bPr">€35</strong></div><input type="range" id="sPr" min="10" max="100" value="35" oninput="uBC()"></div></div>
+<div class="sl-grp"><h5>Unit Economics</h5>
+<div class="sl-item"><div class="sl-lbl"><span>CAC (€K)</span><strong id="bCac">€5K</strong></div><input type="range" id="sCac" min="1" max="20" value="5" oninput="uBC()"></div>
+<div class="sl-item"><div class="sl-lbl"><span>Annual Churn</span><strong id="bCh">12%</strong></div><input type="range" id="sCh" min="2" max="30" value="12" oninput="uBC()"></div></div></div>
+<div><div class="kpi-grid-2">
+<div class="kpi"><div class="lb">ARR</div><div class="val" style="color:var(--ac)" id="bArr">—</div></div>
+<div class="kpi"><div class="lb">Customers</div><div class="val" style="color:var(--bl)" id="bCust">—</div></div>
+<div class="kpi"><div class="lb">LTV:CAC</div><div class="val" id="bLtv">—</div></div>
+<div class="kpi"><div class="lb">Payback (mo)</div><div class="val" id="bPay">—</div></div></div>
+<div class="verdict-bx" id="vBx" style="background:rgba(74,222,128,.08);border:1px solid rgba(74,222,128,.25)"><div style="font-size:10px;color:var(--t3)">VERDICT</div><div style="font-size:20px;font-weight:700" id="vTx" style="color:var(--gn)">STRONG GO</div></div>
+<div class="chart-fl"><div class="ct">5-Year Revenue (€M)</div><canvas id="cProj" height="130"></canvas></div></div></div></div>`}
+let pCh=null;
+function initBC(){uBC()}
+function uBC(){
+const tam=+document.getElementById("sTam").value,sh=+document.getElementById("sSh").value,pr=+document.getElementById("sPr").value,cac=+document.getElementById("sCac").value,ch=+document.getElementById("sCh").value;
+document.getElementById("bTam").textContent="€"+tam+"M";document.getElementById("bSh").textContent=sh+"%";
+document.getElementById("bPr").textContent="€"+pr;document.getElementById("bCac").textContent="€"+cac+"K";document.getElementById("bCh").textContent=ch+"%";
+const cust=tam*.4*(sh/100)*1000,arr=cust*pr*12,ltv=(pr*12)/(ch/100),ratio=ltv/(cac*1000),pay=(cac*1000)/(pr*12);
+document.getElementById("bArr").textContent="€"+(arr/1e6).toFixed(1)+"M";
+document.getElementById("bCust").textContent=Math.round(cust).toLocaleString();
+document.getElementById("bLtv").textContent=ratio.toFixed(1)+"x";
+document.getElementById("bPay").textContent=Math.round(pay);
+let col=ratio>=3?"#4ADE80":ratio>=2?"#FB923C":"#F87171",verd=ratio>=3?"STRONG GO":ratio>=2?"CONDITIONAL":"NEEDS WORK";
+document.getElementById("bLtv").style.color=col;document.getElementById("bPay").style.color=pay<=12?"#4ADE80":"#FB923C";
+const vb=document.getElementById("vBx");vb.style.background=col+"10";vb.style.border="1px solid "+col+"35";
+document.getElementById("vTx").style.color=col;document.getElementById("vTx").textContent=verd;
+const d=[1,2,3,4,5].map(y=>Math.round(arr*Math.pow(1+(sh/100)*2,y-1)/1e6*10)/10);
+const cv=document.getElementById("cProj");if(!cv)return;
+if(pCh){pCh.destroy();charts=charts.filter(c=>c!==pCh)}
+pCh=new Chart(cv,{type:"bar",data:{labels:["Y1","Y2","Y3","Y4","Y5"],datasets:[{data:d,backgroundColor:"#CFA64E",borderRadius:3}]},options:{responsive:true,plugins:{legend:{display:false}},scales:{x:{ticks:{color:"#4A4A56",font:{size:10}},grid:{display:false}},y:{ticks:{color:"#4A4A56",font:{size:10}},grid:{color:"#2A2A3230"}}}}});
+charts.push(pCh)}
+
+// DEMO 4: SPRINT
+let ST=[{id:1,t:"API integration for learning module",p:5,pr:"high",s:"done"},{id:2,t:"Dashboard filter component",p:3,pr:"med",s:"done"},{id:3,t:"User onboarding redesign",p:8,pr:"high",s:"review"},{id:4,t:"Excel export",p:3,pr:"med",s:"review"},{id:5,t:"SAP BTP connector",p:5,pr:"high",s:"progress"},{id:6,t:"Notification system",p:3,pr:"low",s:"progress"},{id:7,t:"Performance optimization",p:5,pr:"med",s:"todo"},{id:8,t:"Accessibility audit",p:2,pr:"low",s:"todo"},{id:9,t:"Localization DE/EN",p:5,pr:"med",s:"todo"}];
+const CL={todo:"#6A6A78",progress:"#5B8DEF",review:"#FB923C",done:"#4ADE80"},CN={todo:"To Do",progress:"In Progress",review:"Review",done:"Done"},PC={high:"#F87171",med:"#FB923C",low:"#6A6A78"};
+function spHTML(){return`<div class="demo-box"><div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:14px;flex-wrap:wrap;gap:8px"><div><h4>Sprint 14</h4><span style="font-size:11px;color:var(--t3)">Mar 3–14 · 39 pts · Day 8</span></div><div class="tab-g"><button class="tab-b on" id="spBrd" onclick="spV('b')">Board</button><button class="tab-b" id="spBrn" onclick="spV('c')">Burndown</button></div></div><div class="kpi-row" id="spKpi"></div><div id="spBoard"></div><div id="spBurn" style="display:none"><div class="chart-fl"><div class="ct">Burndown (Story Points)</div><canvas id="cBurn" height="200"></canvas></div></div></div>`}
+function initSp(){ST=[{id:1,t:"API integration for learning module",p:5,pr:"high",s:"done"},{id:2,t:"Dashboard filter component",p:3,pr:"med",s:"done"},{id:3,t:"User onboarding redesign",p:8,pr:"high",s:"review"},{id:4,t:"Excel export",p:3,pr:"med",s:"review"},{id:5,t:"SAP BTP connector",p:5,pr:"high",s:"progress"},{id:6,t:"Notification system",p:3,pr:"low",s:"progress"},{id:7,t:"Performance optimization",p:5,pr:"med",s:"todo"},{id:8,t:"Accessibility audit",p:2,pr:"low",s:"todo"},{id:9,t:"Localization DE/EN",p:5,pr:"med",s:"todo"}];rSp()}
+function rSp(){const tot=ST.reduce((s,t)=>s+t.p,0),dn=ST.filter(t=>t.s==="done").reduce((s,t)=>s+t.p,0),v=Math.round(dn/tot*100);
+document.getElementById("spKpi").innerHTML=`<div class="kpi"><div class="lb">Velocity</div><div class="val" style="color:${v>=60?"var(--gn)":"var(--or)"}">${v}%</div></div><div class="kpi"><div class="lb">Done</div><div class="val" style="color:var(--gn)">${dn}/${tot}</div></div><div class="kpi"><div class="lb">Blocked</div><div class="val" style="color:var(--t3)">0</div></div>`;
+const cols=["todo","progress","review","done"];let h='<div class="kanban">';
+cols.forEach(c=>{const ts=ST.filter(t=>t.s===c),nx=cols[cols.indexOf(c)+1];
+h+=`<div><div class="kan-hd"><div class="dot" style="background:${CL[c]}"></div><span>${CN[c]}</span><span class="cnt">${ts.length}</span></div>`;
+ts.forEach(t=>{h+=`<div class="kan-card" style="border-left:3px solid ${PC[t.pr]}"><div class="tl">${t.t}</div><div class="mt"><span class="pt">${t.p}pts</span>${c!=="done"?`<button class="kan-mv" onclick="mvT(${t.id},'${nx}')">→</button>`:""}</div></div>`});h+="</div>"});h+="</div>";
+document.getElementById("spBoard").innerHTML=h}
+function mvT(id,ns){ST=ST.map(t=>t.id===id?{...t,s:ns}:t);rSp()}
+let bCh=null;
+function spV(v){const bb=document.getElementById("spBrd"),bn=document.getElementById("spBrn"),bv=document.getElementById("spBoard"),cv=document.getElementById("spBurn");
+if(v==="b"){bb.classList.add("on");bn.classList.remove("on");bv.style.display="";cv.style.display="none"}
+else{bn.classList.add("on");bb.classList.remove("on");bv.style.display="none";cv.style.display="";
+if(bCh){bCh.destroy();charts=charts.filter(c=>c!==bCh)}
+bCh=new Chart(document.getElementById("cBurn"),{type:"line",data:{labels:["D1","D2","D3","D4","D5","D6","D7","D8","D9","D10"],datasets:[{label:"Ideal",data:[39,35,31,27,23,19,16,12,8,4],borderColor:"#4A4A56",borderDash:[5,3],pointRadius:0,fill:false,tension:.2},{label:"Actual",data:[39,37,34,30,25,22,18,14,null,null],borderColor:"#CFA64E",backgroundColor:"rgba(207,166,78,.06)",fill:true,pointRadius:2,pointBackgroundColor:"#CFA64E",tension:.2,spanGaps:false}]},options:{responsive:true,plugins:{legend:{position:"top",labels:{color:"#6A6A78",font:{size:10},usePointStyle:true}}},scales:{x:{ticks:{color:"#4A4A56",font:{size:10}},grid:{color:"#2A2A3218"}},y:{ticks:{color:"#4A4A56",font:{size:10}},grid:{color:"#2A2A3230"}}}}});charts.push(bCh)}}
+
+// DEMO 5: EXCEL (visual representation)
+function excelHTML(){return`<div class="demo-box"><h4 style="margin-bottom:14px">Automated Pricing Report — Before & After</h4>
+<div class="chart-row"><div class="chart-bx"><div class="ct">Before: Manual Process</div>
+<div style="padding:8px"><div style="display:flex;flex-direction:column;gap:6px">
+${["Pull SAP extract #1...#6 manually","Copy-paste into master workbook","Reformat columns (every time)","Rebuild pivot tables","Manual error checking","Format for leadership","Send via email"].map((s,i)=>`<div style="display:flex;align-items:center;gap:8px;font-size:11px;color:var(--rd)"><span style="color:var(--t4);min-width:18px">${i+1}.</span>${s}<span style="margin-left:auto;font-size:10px;color:var(--t4)">~${[4,3,2,3,4,2,1][i]}h</span></div>`).join("")}
+<div style="margin-top:8px;padding-top:8px;border-top:1px solid var(--b1);font-size:12px;font-weight:600;color:var(--rd)">Total: ~40+ hours/month</div></div></div></div>
+<div class="chart-bx"><div class="ct">After: One-Click Macro</div>
+<div style="padding:8px"><div style="display:flex;flex-direction:column;gap:6px">
+${["Click 'Refresh All' button","VBA imports & merges 6 SAP extracts","Auto-formats + rebuilds pivots","Validation flags anomalies","Auto-generates summary sheet"].map((s,i)=>`<div style="display:flex;align-items:center;gap:8px;font-size:11px;color:var(--gn)"><span style="color:var(--t4);min-width:18px">${i+1}.</span>${s}<span style="margin-left:auto;font-size:10px;color:var(--t4)">${["1min","auto","auto","auto","auto"][i]}</span></div>`).join("")}
+<div style="margin-top:8px;padding-top:8px;border-top:1px solid var(--b1);font-size:12px;font-weight:600;color:var(--gn)">Total: ~3 hours/month</div></div></div></div></div>
+<div class="kpi-row"><div class="kpi"><div class="lb">Time Saved</div><div class="val" style="color:var(--gn)">37 hrs</div><div class="ch" style="color:var(--gn)">per month</div></div>
+<div class="kpi"><div class="lb">Error Rate</div><div class="val" style="color:var(--gn)">↓ 90%</div></div>
+<div class="kpi"><div class="lb">Teams Adopted</div><div class="val" style="color:var(--ac)">4</div></div></div></div>`}
+function initExcel(){}
+
+// DEMO 6: SMART EUROPE (timeline)
+function smartHTML(){return`<div class="demo-box"><h4 style="margin-bottom:16px">Internship Timeline — smart Europe GmbH</h4>
+<div style="position:relative;padding-left:20px;border-left:2px solid var(--b1)">
+${[
+{m:"Jan 2026",t:"Onboarding & Discovery",d:"Mapped existing workflows across teams. Identified 12 processes still running on email + manual SharePoint."},
+{m:"Feb 2026",t:"Stakeholder Interviews",d:"Interviewed 50+ internal users. Found that 60% didn't know which tool to use for what. Built a digital tool guide."},
+{m:"Mar 2026",t:"Dashboard & Documentation Sprint",d:"Built Excel tracking reports, created 10+ Confluence docs, and designed initial Figma wireframes for new digital touchpoints."},
+{m:"Ongoing",t:"Digitalization Rollout",d:"Coordinating with IT and Operations to replace manual processes. Status updates automated — 30% less email."},
+].map(s=>`<div style="margin-bottom:20px;position:relative"><div style="position:absolute;left:-26px;top:2px;width:10px;height:10px;border-radius:50%;background:var(--cy);border:2px solid var(--bg)"></div><div style="font-size:10px;color:var(--cy);font-weight:600;letter-spacing:.5px;text-transform:uppercase;margin-bottom:3px">${s.m}</div><div style="font-size:13px;font-weight:600;margin-bottom:3px">${s.t}</div><div style="font-size:12px;color:var(--t2);line-height:1.6">${s.d}</div></div>`).join("")}
+</div></div>`}
+
+// DEMO 7: DATA VIZ (career journey)
+function dvHTML(){return`<div class="demo-box"><h4 style="margin-bottom:16px">Career Journey — Visualized</h4>
+<div style="display:flex;gap:10px;overflow-x:auto;padding-bottom:10px">
+${[
+{y:"2018–22",loc:"Pune, India",role:"B.Tech Engineering",col:"#A78BFA",skills:["CAD","Prototyping","Engineering Thinking"]},
+{y:"2022–24",loc:"Delhi, India",role:"Hero MotoCorp",col:"#FB923C",skills:["SAP","PMO","Excel Macros","Stakeholder Mgmt"]},
+{y:"2024–25",loc:"India",role:"SKF India",col:"#5B8DEF",skills:["Power BI","Analytics","Digital PMO"]},
+{y:"May–Sep 25",loc:"Berlin",role:"Sedris Vision",col:"#4ADE80",skills:["AI/ML","Python","Dashboards"]},
+{y:"2025–27",loc:"Harz",role:"M.Eng. Studies",col:"#A78BFA",skills:["Innovation","Strategy","Research"]},
+{y:"Jan 26+",loc:"Stuttgart",role:"smart Europe",col:"#22D3EE",skills:["Figma","Jira","Digital Transformation"]},
+].map(s=>`<div style="min-width:150px;background:var(--s1);border:1px solid var(--b1);border-radius:var(--rs);padding:14px;border-top:3px solid ${s.col}"><div style="font-size:10px;color:${s.col};font-weight:600;margin-bottom:4px">${s.y}</div><div style="font-size:10px;color:var(--t3);margin-bottom:6px">📍 ${s.loc}</div><div style="font-size:12px;font-weight:600;margin-bottom:8px">${s.role}</div><div style="display:flex;flex-wrap:wrap;gap:3px">${s.skills.map(sk=>`<span style="font-size:9px;padding:2px 5px;border-radius:3px;background:var(--bg);color:var(--t3);border:1px solid var(--b1)">${sk}</span>`).join("")}</div></div>`).join("")}
+</div></div>`}
+function initDV(){}
+
+// DEMO 8: STUTTGART EATS
+function stuttHTML(){return`<div class="demo-box"><h4 style="margin-bottom:14px">Stuttgart Eats — Student Restaurant Finder</h4>
+<div style="display:flex;gap:8px;margin-bottom:14px;flex-wrap:wrap">
+<button class="tab-b on" onclick="this.classList.toggle('on')">🥗 Vegetarian</button>
+<button class="tab-b" onclick="this.classList.toggle('on')">🇮🇳 Indian</button>
+<button class="tab-b" onclick="this.classList.toggle('on')">💰 Under €10</button>
+<button class="tab-b" onclick="this.classList.toggle('on')">⭐ 4.5+</button>
+</div>
+<div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:8px">
+${[
+{n:"Tamarind",c:"Indian",r:"4.7",p:"€8–12",note:"Best dosa in Stuttgart, fight me"},
+{n:"Mandu",c:"Korean",r:"4.5",p:"€7–11",note:"Bibimbap that actually fills you up"},
+{n:"Platzhirsch",c:"German",r:"4.3",p:"€9–14",note:"Maultaschen done right"},
+{n:"Lemon Leaf",c:"Thai",r:"4.6",p:"€8–13",note:"Green curry on a student budget"},
+{n:"Vegi",c:"Vegetarian",r:"4.4",p:"€6–9",note:"The cheapest good lunch in town"},
+{n:"Café Galao",c:"Portuguese",r:"4.5",p:"€5–8",note:"Coffee + pastéis = perfect afternoon"},
+].map(r=>`<div style="background:var(--s1);border:1px solid var(--b1);border-radius:var(--rs);padding:10px"><div style="display:flex;justify-content:space-between;align-items:start;margin-bottom:4px"><div style="font-size:12px;font-weight:600">${r.n}</div><div style="font-size:10px;color:var(--ac)">⭐ ${r.r}</div></div><div style="font-size:10px;color:var(--t3);margin-bottom:3px">${r.c} · ${r.p}</div><div style="font-size:10px;color:var(--t2);font-style:italic">"${r.note}"</div></div>`).join("")}
+</div>
+<div style="margin-top:12px;font-size:11px;color:var(--t4);text-align:center">Built with Python + Streamlit · Data from Google Maps reviews · Updated monthly</div></div>`}
+</script>
+</body>
+</html>
