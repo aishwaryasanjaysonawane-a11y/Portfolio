@@ -1,0 +1,903 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Aishwarya Sonawane — Portfolio</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;0,9..40,700;1,9..40,400&family=Source+Serif+4:ital,opsz,wght@0,8..60,400;0,8..60,600;1,8..60,400&display=swap" rel="stylesheet">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.min.js"></script>
+<style>
+:root {
+  --bg: #0C0C0E; --surface: #16161A; --surface-hover: #1E1E24;
+  --card: #1A1A20; --border: #2A2A32; --text: #E8E6E3;
+  --muted: #8A8A96; --dim: #5A5A66; --accent: #D4A853;
+  --accent-dim: #B8923F; --accent-glow: rgba(212,168,83,0.15);
+  --blue: #5B8DEF; --green: #4ADE80; --red: #F87171;
+  --purple: #A78BFA; --orange: #FB923C; --cyan: #22D3EE;
+  --font: 'DM Sans', sans-serif; --serif: 'Source Serif 4', Georgia, serif;
+  --radius: 12px; --radius-sm: 8px;
+}
+* { margin:0; padding:0; box-sizing:border-box; }
+html { scroll-behavior: smooth; }
+body { background: var(--bg); color: var(--text); font-family: var(--font); overflow-x: hidden; line-height: 1.5; }
+::-webkit-scrollbar { width: 6px; }
+::-webkit-scrollbar-track { background: var(--bg); }
+::-webkit-scrollbar-thumb { background: var(--border); border-radius: 3px; }
+::selection { background: var(--accent); color: var(--bg); }
+a { color: inherit; text-decoration: none; }
+
+@keyframes fadeUp { from { opacity:0; transform:translateY(28px) } to { opacity:1; transform:translateY(0) } }
+@keyframes fadeIn { from { opacity:0 } to { opacity:1 } }
+@keyframes pulse { 0%,100%{opacity:1} 50%{opacity:.4} }
+@keyframes float { 0%,100%{transform:translateY(0)} 50%{transform:translateY(-8px)} }
+
+.fade-up { animation: fadeUp .65s ease both; }
+.fade-in { animation: fadeIn .5s ease both; }
+.delay-1 { animation-delay: .1s; }
+.delay-2 { animation-delay: .2s; }
+.delay-3 { animation-delay: .3s; }
+.delay-4 { animation-delay: .4s; }
+
+/* NAV */
+nav { position:fixed; top:0; left:0; right:0; z-index:100; transition: all .3s; padding: 0 24px; }
+nav.scrolled { background: rgba(12,12,14,.92); backdrop-filter: blur(14px); border-bottom: 1px solid var(--border); }
+.nav-inner { max-width:1100px; margin:0 auto; padding:16px 8px; display:flex; justify-content:space-between; align-items:center; }
+.nav-links { display:flex; gap:28px; }
+.nav-links a { color: var(--muted); font-size:13px; font-weight:500; letter-spacing:.3px; transition: color .2s; }
+.nav-links a:hover { color: var(--accent); }
+.nav-logo { font-weight:700; font-size:16px; letter-spacing:-.3px; }
+.nav-logo span { color: var(--accent); }
+
+/* BADGE */
+.badge { display:inline-block; padding:3px 10px; border-radius:20px; font-size:11px; font-weight:600; letter-spacing:.5px; text-transform:uppercase; }
+
+/* SECTIONS */
+.section { max-width:1100px; margin:0 auto; padding: 80px 32px; }
+.section-tag { font-size:11px; color:var(--accent); text-transform:uppercase; letter-spacing:2.5px; font-weight:600; margin-bottom:8px; }
+.section-title { font-size:32px; font-weight:700; font-family:var(--serif); line-height:1.2; margin-bottom:12px; }
+.section-desc { font-size:15px; color:var(--muted); max-width:560px; line-height:1.6; margin-bottom:40px; }
+
+/* HERO */
+.hero { min-height:100vh; display:flex; align-items:center; justify-content:center; padding:120px 32px 80px; position:relative; overflow:hidden; }
+.hero-glow { position:absolute; top:15%; right:5%; width:500px; height:500px; background:radial-gradient(circle, rgba(212,168,83,.06) 0%, transparent 70%); border-radius:50%; filter:blur(60px); pointer-events:none; }
+.hero-glow-2 { position:absolute; bottom:10%; left:5%; width:350px; height:350px; background:radial-gradient(circle, rgba(91,141,239,.04) 0%, transparent 70%); border-radius:50%; filter:blur(50px); pointer-events:none; }
+.hero-content { max-width:700px; position:relative; z-index:1; }
+.hero h1 { font-size:clamp(42px,6vw,68px); font-weight:700; font-family:var(--serif); line-height:1.08; margin-bottom:20px; letter-spacing:-1.5px; }
+.hero h1 span { color:var(--accent); }
+.hero p { font-size:17px; color:var(--muted); line-height:1.7; margin-bottom:32px; max-width:520px; }
+.hero-badges { display:flex; gap:8px; flex-wrap:wrap; margin-bottom:40px; }
+.hero-badges .badge { background:rgba(212,168,83,.1); color:var(--accent); border:1px solid rgba(212,168,83,.2); }
+.btn-primary { display:inline-block; padding:13px 30px; background:var(--accent); color:var(--bg); border-radius:var(--radius-sm); font-weight:600; font-size:14px; transition:all .2s; font-family:var(--font); border:none; cursor:pointer; }
+.btn-primary:hover { transform:translateY(-2px); box-shadow: 0 8px 24px rgba(212,168,83,.25); }
+.btn-secondary { display:inline-block; padding:13px 30px; background:transparent; color:var(--text); border-radius:var(--radius-sm); font-weight:500; font-size:14px; border:1px solid var(--border); transition:all .2s; }
+.btn-secondary:hover { border-color: var(--accent); color:var(--accent); }
+
+/* ABOUT */
+.about-grid { display:grid; grid-template-columns:2fr 1fr; gap:40px; }
+.about-text p { font-size:15px; color:var(--muted); line-height:1.8; margin-bottom:16px; }
+.quick-facts { background:var(--surface); border-radius:var(--radius); padding:24px; border:1px solid var(--border); height:fit-content; }
+.quick-facts h4 { font-size:12px; color:var(--accent); font-weight:600; text-transform:uppercase; letter-spacing:1px; margin-bottom:16px; }
+.fact-row { display:flex; justify-content:space-between; padding:9px 0; border-bottom:1px solid rgba(42,42,50,.3); font-size:13px; }
+.fact-row:last-child { border:none; }
+.fact-label { color:var(--muted); }
+.fact-value { font-weight:500; }
+
+/* PROJECT CARDS */
+.projects-grid { display:grid; grid-template-columns:1fr 1fr; gap:16px; }
+.project-card { background:var(--surface); border:1px solid var(--border); border-radius:var(--radius); padding:28px; cursor:pointer; transition:all .25s; position:relative; overflow:hidden; }
+.project-card:hover { border-color: rgba(212,168,83,.35); transform:translateY(-4px); box-shadow: 0 12px 32px rgba(0,0,0,.3); }
+.project-card .glow { position:absolute; top:-20px; right:-20px; width:100px; height:100px; border-radius:50%; pointer-events:none; }
+.project-card h3 { font-size:22px; font-weight:700; font-family:var(--serif); margin:12px 0 4px; }
+.project-card .subtitle { font-size:13px; color:var(--muted); margin-bottom:16px; }
+.tool-tags { display:flex; gap:6px; flex-wrap:wrap; }
+.tool-tag { padding:3px 8px; border-radius:4px; font-size:11px; background:var(--bg); color:var(--muted); border:1px solid var(--border); }
+
+/* MODAL */
+.modal-overlay { position:fixed; inset:0; z-index:200; background:rgba(0,0,0,.75); backdrop-filter:blur(10px); display:flex; justify-content:center; align-items:center; padding:20px; opacity:0; pointer-events:none; transition: opacity .25s; }
+.modal-overlay.active { opacity:1; pointer-events:all; }
+.modal { background:var(--card); border-radius:16px; width:100%; max-width:980px; max-height:90vh; overflow-y:auto; border:1px solid var(--border); transform:translateY(20px); transition:transform .3s; }
+.modal-overlay.active .modal { transform:translateY(0); }
+.modal-header { padding:20px 24px; border-bottom:1px solid var(--border); display:flex; justify-content:space-between; align-items:center; position:sticky; top:0; background:var(--card); z-index:10; }
+.modal-header h3 { font-size:20px; font-weight:700; font-family:var(--serif); margin-top:8px; }
+.modal-close { background:var(--surface); border:1px solid var(--border); border-radius:50%; width:36px; height:36px; color:var(--muted); font-size:20px; cursor:pointer; display:flex; align-items:center; justify-content:center; transition:all .2s; }
+.modal-close:hover { border-color:var(--accent); color:var(--accent); }
+.modal-body { padding:24px; }
+.demo-label { font-size:11px; color:var(--accent); text-transform:uppercase; letter-spacing:1.5px; font-weight:600; margin-bottom:14px; }
+.case-study-grid { display:grid; grid-template-columns:1fr 1fr 1fr; gap:16px; margin-top:32px; }
+.case-card { background:var(--surface); border-radius:var(--radius-sm); padding:18px; border:1px solid var(--border); }
+.case-card .icon { font-size:20px; margin-bottom:8px; }
+.case-card .label { font-size:12px; color:var(--accent); font-weight:600; text-transform:uppercase; letter-spacing:.5px; margin-bottom:8px; }
+.case-card p { font-size:13px; color:var(--muted); line-height:1.7; }
+
+/* DEMO CONTAINERS */
+.demo-container { background:var(--bg); border-radius:var(--radius); padding:20px; border:1px solid var(--border); }
+.demo-header { display:flex; justify-content:space-between; align-items:center; margin-bottom:20px; flex-wrap:wrap; gap:10px; }
+.demo-header h4 { font-size:18px; font-weight:600; }
+.tab-group { display:flex; gap:8px; }
+.tab-btn { padding:8px 18px; border-radius:20px; border:1px solid var(--border); background:transparent; color:var(--muted); font-size:13px; font-weight:500; cursor:pointer; font-family:var(--font); transition:all .2s; }
+.tab-btn.active { border-color:var(--accent); background:var(--accent-glow); color:var(--accent); }
+.tab-btn:hover:not(.active) { border-color:var(--dim); }
+
+/* KPI CARDS */
+.kpi-row { display:flex; gap:12px; margin-bottom:20px; flex-wrap:wrap; }
+.kpi-card { background:var(--surface); border:1px solid var(--border); border-radius:var(--radius-sm); padding:14px 18px; flex:1; min-width:130px; }
+.kpi-label { font-size:11px; color:var(--muted); text-transform:uppercase; letter-spacing:.5px; margin-bottom:5px; }
+.kpi-value { font-size:22px; font-weight:700; }
+.kpi-change { font-size:12px; margin-top:3px; }
+
+/* CHART CONTAINERS */
+.chart-grid { display:grid; grid-template-columns:1fr 1fr; gap:16px; margin-bottom:16px; }
+.chart-box { background:var(--surface); border-radius:var(--radius-sm); padding:16px; border:1px solid var(--border); }
+.chart-box .chart-title { font-size:13px; color:var(--muted); margin-bottom:12px; }
+.chart-box canvas { width:100% !important; }
+.chart-full { background:var(--surface); border-radius:var(--radius-sm); padding:16px; border:1px solid var(--border); }
+.chart-full .chart-title { font-size:13px; color:var(--muted); margin-bottom:12px; }
+
+/* AI CHAT */
+.chat-container { background:var(--bg); border-radius:var(--radius); border:1px solid var(--border); height:460px; display:flex; flex-direction:column; }
+.chat-header { padding:12px 18px; border-bottom:1px solid var(--border); display:flex; align-items:center; gap:10px; }
+.chat-dot { width:8px; height:8px; border-radius:50%; background:var(--green); box-shadow:0 0 8px rgba(74,222,128,.4); }
+.chat-messages { flex:1; overflow-y:auto; padding:18px; display:flex; flex-direction:column; gap:12px; }
+.chat-empty { flex:1; display:flex; flex-direction:column; justify-content:center; align-items:center; gap:14px; }
+.chat-empty p { color:var(--muted); font-size:14px; }
+.prompt-btn { background:var(--surface); border:1px solid var(--border); border-radius:var(--radius-sm); padding:10px 14px; color:var(--text); font-size:13px; cursor:pointer; text-align:left; font-family:var(--font); width:100%; transition:all .2s; }
+.prompt-btn:hover { border-color:var(--accent); background:var(--surface-hover); }
+.msg { max-width:85%; padding:10px 14px; border-radius:12px; font-size:13px; line-height:1.6; white-space:pre-wrap; word-wrap:break-word; }
+.msg-user { align-self:flex-end; background:rgba(212,168,83,.12); border:1px solid rgba(212,168,83,.25); color:var(--accent); }
+.msg-ai { align-self:flex-start; background:var(--surface); border:1px solid var(--border); }
+.msg-typing { align-self:flex-start; padding:10px 14px; background:var(--surface); border:1px solid var(--border); border-radius:12px; font-size:13px; color:var(--muted); }
+.msg-typing span { animation:pulse 1.2s infinite; }
+.chat-input-row { padding:12px 16px; border-top:1px solid var(--border); display:flex; gap:8px; }
+.chat-input { flex:1; background:var(--surface); border:1px solid var(--border); border-radius:var(--radius-sm); padding:10px 14px; color:var(--text); font-size:13px; font-family:var(--font); outline:none; }
+.chat-input:focus { border-color:var(--accent); }
+.chat-send { background:var(--accent); color:var(--bg); border:none; border-radius:var(--radius-sm); padding:10px 20px; font-weight:600; font-size:13px; cursor:pointer; font-family:var(--font); }
+
+/* BUSINESS CASE */
+.bc-grid { display:grid; grid-template-columns:1fr 1fr; gap:20px; }
+.slider-group { background:var(--surface); border-radius:var(--radius-sm); padding:16px; border:1px solid var(--border); margin-bottom:16px; }
+.slider-group h5 { font-size:13px; font-weight:600; color:var(--accent); margin-bottom:14px; }
+.slider-item { margin-bottom:14px; }
+.slider-item:last-child { margin-bottom:0; }
+.slider-label { display:flex; justify-content:space-between; margin-bottom:6px; }
+.slider-label span { font-size:12px; color:var(--muted); }
+.slider-label strong { font-size:13px; font-weight:600; color:var(--accent); }
+input[type=range] { width:100%; accent-color:var(--accent); height:4px; -webkit-appearance:none; background:var(--border); border-radius:2px; outline:none; }
+input[type=range]::-webkit-slider-thumb { -webkit-appearance:none; width:14px; height:14px; border-radius:50%; background:var(--accent); cursor:pointer; }
+.verdict-box { border-radius:var(--radius-sm); padding:14px; text-align:center; margin-bottom:16px; }
+.verdict-label { font-size:11px; color:var(--muted); margin-bottom:4px; }
+.verdict-value { font-size:22px; font-weight:700; }
+
+/* KANBAN */
+.kanban-grid { display:grid; grid-template-columns:repeat(4, 1fr); gap:10px; }
+.kanban-col-header { display:flex; align-items:center; gap:6px; margin-bottom:10px; padding:6px 0; }
+.kanban-col-header .dot { width:8px; height:8px; border-radius:50%; }
+.kanban-col-header span { font-size:12px; font-weight:600; text-transform:uppercase; letter-spacing:.5px; }
+.kanban-col-header .count { font-size:11px; color:var(--muted); margin-left:auto; }
+.kanban-card { background:var(--surface); border:1px solid var(--border); border-radius:var(--radius-sm); padding:10px 12px; margin-bottom:6px; transition:all .15s; }
+.kanban-card:hover { border-color:rgba(212,168,83,.3); }
+.kanban-card .title { font-size:12px; font-weight:500; margin-bottom:6px; line-height:1.4; }
+.kanban-card .meta { display:flex; justify-content:space-between; align-items:center; }
+.kanban-card .pts { font-size:10px; color:var(--muted); }
+.kanban-move { background:none; border:1px solid var(--border); border-radius:4px; color:var(--muted); font-size:10px; padding:2px 6px; cursor:pointer; font-family:var(--font); transition:all .15s; }
+.kanban-move:hover { border-color:var(--accent); color:var(--accent); }
+
+/* SKILLS */
+.skills-grid { display:grid; grid-template-columns:repeat(4, 1fr); gap:16px; margin-bottom:32px; }
+.skill-card { background:var(--surface); border-radius:var(--radius); padding:20px; border:1px solid var(--border); }
+.skill-card h4 { font-size:12px; color:var(--accent); font-weight:600; text-transform:uppercase; letter-spacing:1px; margin-bottom:14px; }
+.skill-item { font-size:13px; color:var(--muted); display:flex; align-items:center; gap:8px; padding:4px 0; }
+.skill-dot { width:4px; height:4px; border-radius:50%; background:var(--accent); flex-shrink:0; }
+.certs-box { background:var(--surface); border-radius:var(--radius); padding:24px; border:1px solid var(--border); }
+.certs-box h4 { font-size:12px; color:var(--accent); font-weight:600; text-transform:uppercase; letter-spacing:1px; margin-bottom:16px; }
+.cert-tags { display:flex; flex-wrap:wrap; gap:8px; }
+.cert-tag { padding:6px 14px; border-radius:20px; font-size:12px; background:var(--bg); color:var(--muted); border:1px solid var(--border); }
+
+/* CONTACT */
+.contact-grid { display:flex; gap:16px; flex-wrap:wrap; }
+.contact-card { background:var(--surface); border:1px solid var(--border); border-radius:var(--radius); padding:16px 24px; flex:1 1 200px; transition:all .2s; }
+.contact-card:hover { border-color:rgba(212,168,83,.4); }
+.contact-card .label { font-size:11px; color:var(--muted); text-transform:uppercase; letter-spacing:.5px; margin-bottom:4px; }
+.contact-card .value { font-size:14px; font-weight:500; }
+
+footer { border-top:1px solid var(--border); padding:24px 32px; text-align:center; }
+footer p { font-size:12px; color:var(--dim); }
+
+/* RESPONSIVE */
+@media (max-width:768px) {
+  .about-grid, .projects-grid, .bc-grid, .chart-grid, .case-study-grid { grid-template-columns:1fr; }
+  .skills-grid { grid-template-columns:1fr 1fr; }
+  .kanban-grid { grid-template-columns:1fr 1fr; }
+  .hero h1 { font-size:36px; }
+  .section { padding:60px 20px; }
+  .hero { padding:100px 20px 60px; }
+}
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav id="navbar">
+  <div class="nav-inner">
+    <div class="nav-logo"><span>A</span>S</div>
+    <div class="nav-links">
+      <a href="#about">About</a>
+      <a href="#projects">Projects</a>
+      <a href="#skills">Skills</a>
+      <a href="#contact">Contact</a>
+    </div>
+  </div>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-glow"></div>
+  <div class="hero-glow-2"></div>
+  <div class="hero-content fade-up">
+    <div style="font-size:12px;color:var(--accent);text-transform:uppercase;letter-spacing:3px;font-weight:600;margin-bottom:16px;">Portfolio · 2026</div>
+    <h1>Aishwarya<br><span>Sonawane</span></h1>
+    <p>Working student in digital transformation, analytics, and product strategy. Building dashboards, AI tools, and business cases for companies like SAP, Siemens, and Bosch.</p>
+    <div class="hero-badges">
+      <span class="badge">Product Management</span>
+      <span class="badge">Data Analytics</span>
+      <span class="badge">AI / ML</span>
+      <span class="badge">Project Management</span>
+      <span class="badge">Business Strategy</span>
+    </div>
+    <div style="display:flex;gap:12px;flex-wrap:wrap;">
+      <a href="#projects" class="btn-primary">View Projects</a>
+      <a href="#contact" class="btn-secondary">Get in Touch</a>
+    </div>
+  </div>
+</section>
+
+<!-- ABOUT -->
+<section id="about" class="section">
+  <div class="section-tag">About</div>
+  <div class="section-title">Background</div>
+  <div class="about-grid" style="margin-top:24px;">
+    <div class="about-text">
+      <p>I am an M.Eng. student in Technology & Innovation Management at Hochschule Harz, currently based in Stuttgart. Over the past 3+ years, I have worked across digital transformation, PMO, and analytics roles at smart Europe GmbH, Sedris Vision, SKF India, and Hero MotoCorp.</p>
+      <p>My day-to-day work sits at the intersection of data and decisions: building Excel dashboards and Power BI reports, coordinating cross-functional teams in Jira and Confluence, and supporting SAP system implementations. I have recently started working with generative AI tools and SAP Business Technology Platform.</p>
+      <p>I am targeting Werkstudent positions in product management, project management, business development, strategy, AI/ML, and cloud across Germany.</p>
+    </div>
+    <div class="quick-facts">
+      <h4>Quick Facts</h4>
+      <div class="fact-row"><span class="fact-label">Location</span><span class="fact-value">Stuttgart, Germany</span></div>
+      <div class="fact-row"><span class="fact-label">Degree</span><span class="fact-value">M.Eng. (2025–2027)</span></div>
+      <div class="fact-row"><span class="fact-label">Experience</span><span class="fact-value">3+ years</span></div>
+      <div class="fact-row"><span class="fact-label">Languages</span><span class="fact-value">EN (Fluent), DE (B2)</span></div>
+      <div class="fact-row"><span class="fact-label">Availability</span><span class="fact-value">20 hrs/week</span></div>
+    </div>
+  </div>
+</section>
+
+<!-- PROJECTS -->
+<section id="projects" class="section">
+  <div class="section-tag">Projects</div>
+  <div class="section-title">Work & Demos</div>
+  <div class="section-desc">Each project includes a working interactive demo and a case study breakdown. Click any card to explore.</div>
+  <div class="projects-grid" id="projectsGrid"></div>
+</section>
+
+<!-- MODAL -->
+<div class="modal-overlay" id="modalOverlay">
+  <div class="modal">
+    <div class="modal-header">
+      <div id="modalHeaderContent"></div>
+      <button class="modal-close" onclick="closeModal()">×</button>
+    </div>
+    <div class="modal-body" id="modalBody"></div>
+  </div>
+</div>
+
+<!-- SKILLS -->
+<section id="skills" class="section">
+  <div class="section-tag">Skills & Certifications</div>
+  <div class="section-title" style="margin-bottom:32px;">What I Work With</div>
+  <div class="skills-grid">
+    <div class="skill-card">
+      <h4>Analytics</h4>
+      <div class="skill-item"><div class="skill-dot"></div>MS Excel (Advanced)</div>
+      <div class="skill-item"><div class="skill-dot"></div>Power BI</div>
+      <div class="skill-item"><div class="skill-dot"></div>Tableau</div>
+      <div class="skill-item"><div class="skill-dot"></div>SAP Analytics</div>
+      <div class="skill-item"><div class="skill-dot"></div>Python</div>
+      <div class="skill-item"><div class="skill-dot"></div>SQL</div>
+    </div>
+    <div class="skill-card">
+      <h4>Platforms</h4>
+      <div class="skill-item"><div class="skill-dot"></div>SAP BTP</div>
+      <div class="skill-item"><div class="skill-dot"></div>Jira</div>
+      <div class="skill-item"><div class="skill-dot"></div>Figma</div>
+      <div class="skill-item"><div class="skill-dot"></div>Confluence</div>
+      <div class="skill-item"><div class="skill-dot"></div>SharePoint</div>
+      <div class="skill-item"><div class="skill-dot"></div>MS Office</div>
+    </div>
+    <div class="skill-card">
+      <h4>AI & Dev</h4>
+      <div class="skill-item"><div class="skill-dot"></div>Generative AI</div>
+      <div class="skill-item"><div class="skill-dot"></div>LLM Prompting</div>
+      <div class="skill-item"><div class="skill-dot"></div>Agile / Scrum</div>
+      <div class="skill-item"><div class="skill-dot"></div>SDLC</div>
+      <div class="skill-item"><div class="skill-dot"></div>Git</div>
+    </div>
+    <div class="skill-card">
+      <h4>Strategy</h4>
+      <div class="skill-item"><div class="skill-dot"></div>Business Cases</div>
+      <div class="skill-item"><div class="skill-dot"></div>Market Sizing</div>
+      <div class="skill-item"><div class="skill-dot"></div>Competitive Analysis</div>
+      <div class="skill-item"><div class="skill-dot"></div>Change Management</div>
+      <div class="skill-item"><div class="skill-dot"></div>Stakeholder Mgmt</div>
+    </div>
+  </div>
+  <div class="certs-box">
+    <h4>Certifications</h4>
+    <div class="cert-tags">
+      <span class="cert-tag">Google Project Management Certificate</span>
+      <span class="cert-tag">SAP BTP Fundamentals</span>
+      <span class="cert-tag">Microsoft Excel Advanced — Macros & VBA</span>
+      <span class="cert-tag">Generative AI for Everyone (DeepLearning.AI)</span>
+      <span class="cert-tag">Agile with Atlassian Jira</span>
+    </div>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section id="contact" class="section" style="padding-bottom:120px;">
+  <div class="section-tag">Contact</div>
+  <div class="section-title">Let's Connect</div>
+  <div class="section-desc">Open to Werkstudent roles in product management, project management, business development, strategy, AI/ML, and cloud across Germany.</div>
+  <div class="contact-grid">
+    <a href="mailto:aishwarya.harz@gmail.com" class="contact-card"><div class="label">Email</div><div class="value">aishwarya.harz@gmail.com</div></a>
+    <a href="tel:+4915563481744" class="contact-card"><div class="label">Phone</div><div class="value">+49 155 63481744</div></a>
+    <a href="https://linkedin.com/in/aishwarya-sonawane" target="_blank" class="contact-card"><div class="label">LinkedIn</div><div class="value">linkedin.com/in/aishwarya-sonawane</div></a>
+    <div class="contact-card"><div class="label">Location</div><div class="value">Stuttgart, Germany</div></div>
+  </div>
+</section>
+
+<footer><p>Aishwarya Sonawane · 2026 · Built with HTML, CSS & Chart.js</p></footer>
+
+<script>
+// ============================================================
+// PROJECT DATA
+// ============================================================
+const PROJECTS = [
+  {
+    id: "dashboard", tag: "Data & Analytics", title: "Market Pulse",
+    subtitle: "Global Learning Delivery Dashboard", color: "#D4A853",
+    tools: ["Excel", "Power BI", "SAP Analytics", "Python"],
+    context: "SAP Learning Services needed real-time visibility into global delivery metrics across digital and instructor-led channels. Existing Excel reports were manual, slow, and inconsistent across regions.",
+    approach: "Designed a multi-view dashboard tracking enrollments, completion rates, revenue vs targets, and regional delivery mix. Built data pipelines from SAP Enterprise Analytics and Excel sources, with interactive filters for period and region segmentation.",
+    impact: "Reduced reporting time from 2 days to 15 minutes. Enabled data-driven decisions on resource allocation across EMEA, APAC, and Americas. Dashboard adopted by 3 regional delivery heads."
+  },
+  {
+    id: "ai", tag: "AI / ML", title: "AI Strategy Assistant",
+    subtitle: "LLM-Powered Market Analysis Tool", color: "#5B8DEF",
+    tools: ["Generative AI", "Python", "Prompt Engineering", "SAP BTP"],
+    context: "Strategy teams spent 3–5 hours per competitive analysis request. Market sizing, positioning matrices, and KPI recommendations were created ad-hoc with no consistent framework.",
+    approach: "Built an AI-assisted tool using generative AI (LLM) with structured prompts for market analysis, competitive positioning, and KPI framework generation. Integrated with SAP BTP for enterprise data context.",
+    impact: "Reduced analysis turnaround from 4 hours to 10 minutes. Standardized output quality across the strategy team. Prototype selected for expansion into customer-facing learning advisory tool."
+  },
+  {
+    id: "strategy", tag: "Product Strategy", title: "Launch Playbook",
+    subtitle: "Cloud Product Business Case Calculator", color: "#4ADE80",
+    tools: ["Excel (Macros)", "Financial Modeling", "SAP Cloud", "Figma"],
+    context: "Product teams launching new SAP cloud solutions lacked a standardized framework for business case evaluation. Go/no-go decisions were inconsistent and relied on gut feel rather than unit economics.",
+    approach: "Built an interactive business case calculator with configurable market assumptions (TAM, share, pricing) and unit economics (CAC, churn, LTV). Automated Go/No-Go scoring based on LTV:CAC ratio and payback period.",
+    impact: "Adopted by 2 product teams for cloud solution launch evaluation. Standardized the Go/No-Go framework across the business unit. Saved 6+ hours per business case preparation."
+  },
+  {
+    id: "sprint", tag: "Project Management", title: "Sprint Command",
+    subtitle: "Agile Sprint Management Dashboard", color: "#A78BFA",
+    tools: ["Jira", "Agile/Scrum", "Confluence", "SharePoint"],
+    context: "Digital transformation PMO managed 4+ concurrent sprints across distributed teams. Sprint health visibility was fragmented across Jira, email updates, and weekly standups.",
+    approach: "Designed a unified sprint dashboard with Kanban board view, burndown chart, and velocity tracking. Integrated task management with priority-based visual indicators and one-click status transitions.",
+    impact: "Improved sprint completion rate from 72% to 89%. Reduced standup meeting time by 40% through real-time board visibility. Scaled to 4 cross-functional teams across Germany and India."
+  }
+];
+
+// ============================================================
+// RENDER PROJECT CARDS
+// ============================================================
+const grid = document.getElementById("projectsGrid");
+PROJECTS.forEach((p, i) => {
+  const card = document.createElement("div");
+  card.className = `project-card fade-up delay-${i+1}`;
+  card.onclick = () => openModal(p.id);
+  card.innerHTML = `
+    <div class="glow" style="background:radial-gradient(circle,${p.color}12 0%,transparent 70%)"></div>
+    <span class="badge" style="background:${p.color}18;color:${p.color};border:1px solid ${p.color}30">${p.tag}</span>
+    <h3>${p.title}</h3>
+    <div class="subtitle">${p.subtitle}</div>
+    <div class="tool-tags">${p.tools.map(t => `<span class="tool-tag">${t}</span>`).join("")}</div>
+  `;
+  grid.appendChild(card);
+});
+
+// ============================================================
+// MODAL
+// ============================================================
+let activeCharts = [];
+
+function destroyCharts() {
+  activeCharts.forEach(c => c.destroy());
+  activeCharts = [];
+}
+
+function openModal(id) {
+  destroyCharts();
+  const p = PROJECTS.find(x => x.id === id);
+  const overlay = document.getElementById("modalOverlay");
+  const header = document.getElementById("modalHeaderContent");
+  const body = document.getElementById("modalBody");
+
+  header.innerHTML = `
+    <span class="badge" style="background:${p.color}18;color:${p.color};border:1px solid ${p.color}30">${p.tag}</span>
+    <h3>${p.title}</h3>
+  `;
+
+  let demoHTML = "";
+  if (id === "dashboard") demoHTML = getDashboardHTML();
+  else if (id === "ai") demoHTML = getAIHTML();
+  else if (id === "strategy") demoHTML = getStrategyHTML();
+  else if (id === "sprint") demoHTML = getSprintHTML();
+
+  body.innerHTML = `
+    <div class="demo-label">Live Demo</div>
+    ${demoHTML}
+    <div class="case-study-grid">
+      <div class="case-card"><div class="icon">📋</div><div class="label">Context</div><p>${p.context}</p></div>
+      <div class="case-card"><div class="icon">⚙️</div><div class="label">Approach</div><p>${p.approach}</p></div>
+      <div class="case-card"><div class="icon">📈</div><div class="label">Impact</div><p>${p.impact}</p></div>
+    </div>
+  `;
+
+  overlay.classList.add("active");
+  document.body.style.overflow = "hidden";
+
+  // Init charts/interactivity after DOM update
+  requestAnimationFrame(() => {
+    if (id === "dashboard") initDashboardCharts();
+    else if (id === "ai") initAIChat();
+    else if (id === "strategy") initStrategy();
+    else if (id === "sprint") initSprint();
+  });
+}
+
+function closeModal() {
+  destroyCharts();
+  document.getElementById("modalOverlay").classList.remove("active");
+  document.body.style.overflow = "";
+}
+
+document.getElementById("modalOverlay").addEventListener("click", e => {
+  if (e.target === e.currentTarget) closeModal();
+});
+document.addEventListener("keydown", e => { if (e.key === "Escape") closeModal(); });
+
+// ============================================================
+// DEMO 1: DASHBOARD
+// ============================================================
+function getDashboardHTML() {
+  return `
+  <div class="demo-container">
+    <div class="demo-header">
+      <h4>Global Learning Delivery Dashboard</h4>
+      <div class="tab-group">
+        <button class="tab-btn active" onclick="switchPeriod(this,'Q2 2025')">Q2 2025</button>
+        <button class="tab-btn" onclick="switchPeriod(this,'Q3 2025')">Q3 2025</button>
+        <button class="tab-btn" onclick="switchPeriod(this,'Q4 2025')">Q4 2025</button>
+      </div>
+    </div>
+    <div class="kpi-row">
+      <div class="kpi-card"><div class="kpi-label">Total Enrollments</div><div class="kpi-value" style="color:var(--accent)" id="kpi-enroll">12,847</div><div class="kpi-change" style="color:var(--green)">+14.2% vs LQ</div></div>
+      <div class="kpi-card"><div class="kpi-label">Completion Rate</div><div class="kpi-value" style="color:var(--green)" id="kpi-comp">78.3%</div><div class="kpi-change" style="color:var(--green)">+3.1pp</div></div>
+      <div class="kpi-card"><div class="kpi-label">Digital Delivery</div><div class="kpi-value" style="color:var(--blue)" id="kpi-dig">68%</div><div class="kpi-change" style="color:var(--green)">+5.8pp</div></div>
+      <div class="kpi-card"><div class="kpi-label">NPS Score</div><div class="kpi-value" style="color:var(--orange)" id="kpi-nps">72</div><div class="kpi-change" style="color:var(--red)">-2 pts</div></div>
+    </div>
+    <div class="chart-grid">
+      <div class="chart-box"><div class="chart-title">Revenue vs Target (€K)</div><canvas id="revenueChart" height="180"></canvas></div>
+      <div class="chart-box"><div class="chart-title">Delivery by Region</div><canvas id="regionChart" height="180"></canvas></div>
+    </div>
+    <div class="chart-full"><div class="chart-title">Digital vs Instructor-Led Sessions (Weekly)</div><canvas id="deliveryChart" height="150"></canvas></div>
+  </div>`;
+}
+
+function switchPeriod(btn, period) {
+  btn.parentElement.querySelectorAll(".tab-btn").forEach(b => b.classList.remove("active"));
+  btn.classList.add("active");
+  const kpis = {
+    "Q2 2025": { e:"11,230", c:"75.1%", d:"62%", n:"74" },
+    "Q3 2025": { e:"12,847", c:"78.3%", d:"68%", n:"72" },
+    "Q4 2025": { e:"14,102", c:"81.0%", d:"72%", n:"75" },
+  };
+  const k = kpis[period];
+  document.getElementById("kpi-enroll").textContent = k.e;
+  document.getElementById("kpi-comp").textContent = k.c;
+  document.getElementById("kpi-dig").textContent = k.d;
+  document.getElementById("kpi-nps").textContent = k.n;
+}
+
+const chartDefaults = { color: "#8A8A96", borderColor: "#2A2A32" };
+
+function initDashboardCharts() {
+  const revCtx = document.getElementById("revenueChart");
+  if (!revCtx) return;
+
+  const c1 = new Chart(revCtx, {
+    type: "line",
+    data: {
+      labels: ["Jan","Feb","Mar","Apr","May","Jun","Jul","Aug"],
+      datasets: [
+        { label:"Target", data:[130,145,150,160,170,180,190,200], borderColor:"#5A5A66", borderDash:[6,4], pointRadius:0, fill:false, tension:.3 },
+        { label:"Actual", data:[142,158,137,175,189,201,195,218], borderColor:"#D4A853", backgroundColor:"rgba(212,168,83,.1)", fill:true, pointRadius:3, pointBackgroundColor:"#D4A853", tension:.3 }
+      ]
+    },
+    options: { responsive:true, plugins:{ legend:{display:false} }, scales:{ x:{ticks:{color:"#5A5A66",font:{size:11}},grid:{color:"#2A2A3220"}}, y:{ticks:{color:"#5A5A66",font:{size:11}},grid:{color:"#2A2A3240"}} } }
+  });
+
+  const c2 = new Chart(document.getElementById("regionChart"), {
+    type: "doughnut",
+    data: {
+      labels: ["EMEA","APAC","Americas","Other"],
+      datasets: [{ data:[42,28,22,8], backgroundColor:["#D4A853","#5B8DEF","#4ADE80","#A78BFA"], borderWidth:0 }]
+    },
+    options: { responsive:true, cutout:"55%", plugins:{ legend:{ position:"bottom", labels:{color:"#8A8A96", font:{size:11}, padding:12, usePointStyle:true, pointStyleWidth:8 } } } }
+  });
+
+  const c3 = new Chart(document.getElementById("deliveryChart"), {
+    type: "bar",
+    data: {
+      labels: ["W1","W2","W3","W4","W5","W6"],
+      datasets: [
+        { label:"Digital", data:[85,92,78,105,98,112], backgroundColor:"#5B8DEF", borderRadius:4 },
+        { label:"Instructor-Led", data:[42,38,45,40,52,48], backgroundColor:"#D4A853", borderRadius:4 }
+      ]
+    },
+    options: { responsive:true, plugins:{ legend:{ position:"top", labels:{color:"#8A8A96",font:{size:11},usePointStyle:true,pointStyleWidth:8} } }, scales:{ x:{ticks:{color:"#5A5A66",font:{size:11}},grid:{display:false}}, y:{ticks:{color:"#5A5A66",font:{size:11}},grid:{color:"#2A2A3240"}} } }
+  });
+
+  activeCharts.push(c1, c2, c3);
+}
+
+// ============================================================
+// DEMO 2: AI CHAT
+// ============================================================
+const AI_RESPONSES = [
+  { q: "Analyze market entry for SAP BTP in APAC mid-market", a: "Based on current market data, SAP BTP adoption in APAC mid-market shows 23% YoY growth.\n\nKey opportunity segments:\n• Manufacturing (38% of TAM) — strong pull for predictive maintenance\n• Retail (24%) — demand for real-time inventory analytics\n• Financial Services (18%) — regulatory compliance automation\n\nRecommended: Partner-led model via local SIs, targeting manufacturing first.\nExpected 6-month pipeline: €2.8M." },
+  { q: "Draft a competitive positioning matrix vs Salesforce", a: "Competitive Matrix — SAP BTP vs Salesforce Platform:\n\nERP Integration: SAP — Native (S/4HANA) | SF — Requires middleware\nAI/ML: SAP — AI Core + BTP | SF — Einstein GPT\nData Layer: SAP — HANA Cloud | SF — Data Cloud\nLow-Code: SAP — SAP Build | SF — Lightning\nPricing: SAP — Consumption-based | SF — Per-user + platform\n\nKey differentiator: End-to-end process integration.\nSAP wins on enterprise depth; Salesforce wins on developer ecosystem." },
+  { q: "Suggest KPIs for learning services delivery", a: "KPI Framework for Learning Services:\n\n1. Delivery Efficiency\n   - Course completion rate (target >80%)\n   - Avg time-to-competency\n   - Digital vs instructor-led ratio\n\n2. Business Impact\n   - Post-training productivity lift\n   - Support ticket reduction (target -15%)\n   - Certification pass rate\n\n3. Engagement\n   - NPS (target >70)\n   - Repeat enrollment rate\n   - Content utilization by module\n\nReporting: Weekly ops dashboard + monthly executive review." },
+];
+
+function getAIHTML() {
+  return `
+  <div class="chat-container" id="chatContainer">
+    <div class="chat-header">
+      <div class="chat-dot"></div>
+      <span style="font-size:14px;font-weight:600">AI Strategy Assistant</span>
+      <span style="font-size:11px;color:var(--muted);margin-left:auto">Powered by LLM</span>
+    </div>
+    <div class="chat-messages" id="chatMessages">
+      <div class="chat-empty" id="chatEmpty">
+        <div style="font-size:36px">🧠</div>
+        <p>Try one of these prompts:</p>
+        <div style="display:flex;flex-direction:column;gap:8px;width:100%" id="promptButtons"></div>
+      </div>
+    </div>
+    <div class="chat-input-row">
+      <input class="chat-input" id="chatInput" placeholder="Ask about market strategy, competitive analysis, KPIs..." />
+      <button class="chat-send" id="chatSendBtn">Send</button>
+    </div>
+  </div>`;
+}
+
+function initAIChat() {
+  const msgContainer = document.getElementById("chatMessages");
+  const input = document.getElementById("chatInput");
+  const sendBtn = document.getElementById("chatSendBtn");
+  const promptBtns = document.getElementById("promptButtons");
+  const chatEmpty = document.getElementById("chatEmpty");
+  let msgCount = 0;
+
+  AI_RESPONSES.forEach((r, i) => {
+    const btn = document.createElement("button");
+    btn.className = "prompt-btn";
+    btn.textContent = r.q;
+    btn.onclick = () => sendMsg(r.q);
+    promptBtns.appendChild(btn);
+  });
+
+  function sendMsg(text) {
+    const q = text || input.value.trim();
+    if (!q) return;
+    input.value = "";
+    if (chatEmpty) chatEmpty.style.display = "none";
+
+    const userMsg = document.createElement("div");
+    userMsg.className = "msg msg-user";
+    userMsg.textContent = q;
+    msgContainer.appendChild(userMsg);
+
+    const typingMsg = document.createElement("div");
+    typingMsg.className = "msg-typing";
+    typingMsg.innerHTML = "<span>Analyzing...</span>";
+    msgContainer.appendChild(typingMsg);
+    msgContainer.scrollTop = msgContainer.scrollHeight;
+
+    const match = AI_RESPONSES[msgCount % AI_RESPONSES.length];
+    msgCount++;
+
+    setTimeout(() => {
+      typingMsg.remove();
+      const aiMsg = document.createElement("div");
+      aiMsg.className = "msg msg-ai";
+      aiMsg.textContent = match.a;
+      msgContainer.appendChild(aiMsg);
+      msgContainer.scrollTop = msgContainer.scrollHeight;
+    }, 1200);
+  }
+
+  sendBtn.onclick = () => sendMsg();
+  input.onkeydown = e => { if (e.key === "Enter") sendMsg(); };
+}
+
+// ============================================================
+// DEMO 3: BUSINESS CASE
+// ============================================================
+function getStrategyHTML() {
+  return `
+  <div class="demo-container">
+    <h4 style="font-size:18px;font-weight:600;margin-bottom:20px">Cloud Product Business Case Calculator</h4>
+    <div class="bc-grid">
+      <div>
+        <div class="slider-group">
+          <h5>Market Assumptions</h5>
+          <div class="slider-item">
+            <div class="slider-label"><span>Total Addressable Market</span><strong id="tamVal">€50M</strong></div>
+            <input type="range" id="tamSlider" min="10" max="200" value="50" oninput="updateBC()">
+          </div>
+          <div class="slider-item">
+            <div class="slider-label"><span>Target Market Share</span><strong id="shareVal">8%</strong></div>
+            <input type="range" id="shareSlider" min="1" max="25" value="8" oninput="updateBC()">
+          </div>
+          <div class="slider-item">
+            <div class="slider-label"><span>Monthly Price / User</span><strong id="priceVal">€35</strong></div>
+            <input type="range" id="priceSlider" min="10" max="100" value="35" oninput="updateBC()">
+          </div>
+        </div>
+        <div class="slider-group">
+          <h5>Unit Economics</h5>
+          <div class="slider-item">
+            <div class="slider-label"><span>Customer Acquisition Cost (€K)</span><strong id="cacVal">€5K</strong></div>
+            <input type="range" id="cacSlider" min="1" max="20" value="5" oninput="updateBC()">
+          </div>
+          <div class="slider-item">
+            <div class="slider-label"><span>Annual Churn Rate</span><strong id="churnVal">12%</strong></div>
+            <input type="range" id="churnSlider" min="2" max="30" value="12" oninput="updateBC()">
+          </div>
+        </div>
+      </div>
+      <div>
+        <div class="kpi-row" style="display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:16px;">
+          <div class="kpi-card"><div class="kpi-label">Projected ARR</div><div class="kpi-value" style="color:var(--accent)" id="bc-arr">—</div></div>
+          <div class="kpi-card"><div class="kpi-label">Target Customers</div><div class="kpi-value" style="color:var(--blue)" id="bc-cust">—</div></div>
+          <div class="kpi-card"><div class="kpi-label">LTV : CAC</div><div class="kpi-value" id="bc-ltv">—</div></div>
+          <div class="kpi-card"><div class="kpi-label">Payback (months)</div><div class="kpi-value" id="bc-payback">—</div></div>
+        </div>
+        <div class="verdict-box" id="verdictBox" style="background:rgba(74,222,128,.08);border:1px solid rgba(74,222,128,.25);">
+          <div class="verdict-label">GO / NO-GO VERDICT</div>
+          <div class="verdict-value" id="verdictText" style="color:var(--green)">STRONG GO</div>
+        </div>
+        <div class="chart-full"><div class="chart-title">5-Year Revenue Projection (€M)</div><canvas id="projChart" height="140"></canvas></div>
+      </div>
+    </div>
+  </div>`;
+}
+
+let projChart = null;
+function initStrategy() { updateBC(); }
+
+function updateBC() {
+  const tam = +document.getElementById("tamSlider").value;
+  const share = +document.getElementById("shareSlider").value;
+  const price = +document.getElementById("priceSlider").value;
+  const cac = +document.getElementById("cacSlider").value;
+  const churn = +document.getElementById("churnSlider").value;
+
+  document.getElementById("tamVal").textContent = `€${tam}M`;
+  document.getElementById("shareVal").textContent = `${share}%`;
+  document.getElementById("priceVal").textContent = `€${price}`;
+  document.getElementById("cacVal").textContent = `€${cac}K`;
+  document.getElementById("churnVal").textContent = `${churn}%`;
+
+  const sam = tam * 0.4;
+  const customers = sam * (share / 100) * 1000;
+  const arr = customers * price * 12;
+  const ltv = (price * 12) / (churn / 100);
+  const ltvCac = ltv / (cac * 1000);
+  const payback = (cac * 1000) / (price * 12);
+
+  document.getElementById("bc-arr").textContent = `€${(arr/1e6).toFixed(1)}M`;
+  document.getElementById("bc-cust").textContent = Math.round(customers).toLocaleString();
+  document.getElementById("bc-ltv").textContent = `${ltvCac.toFixed(1)}x`;
+  document.getElementById("bc-payback").textContent = Math.round(payback);
+
+  const ltvEl = document.getElementById("bc-ltv");
+  const paybackEl = document.getElementById("bc-payback");
+  const verdictBox = document.getElementById("verdictBox");
+  const verdictText = document.getElementById("verdictText");
+
+  let color, verdict;
+  if (ltvCac >= 3) { color = "#4ADE80"; verdict = "STRONG GO"; }
+  else if (ltvCac >= 2) { color = "#FB923C"; verdict = "CONDITIONAL"; }
+  else { color = "#F87171"; verdict = "NEEDS WORK"; }
+
+  ltvEl.style.color = color;
+  paybackEl.style.color = payback <= 12 ? "#4ADE80" : "#FB923C";
+  verdictBox.style.background = color + "12";
+  verdictBox.style.border = `1px solid ${color}40`;
+  verdictText.style.color = color;
+  verdictText.textContent = verdict;
+
+  // Chart
+  const projData = [1,2,3,4,5].map(yr => Math.round(arr * Math.pow(1 + (share/100)*2, yr-1) / 1e6 * 10) / 10);
+  const canvas = document.getElementById("projChart");
+  if (!canvas) return;
+
+  if (projChart) { projChart.destroy(); activeCharts = activeCharts.filter(c => c !== projChart); }
+  projChart = new Chart(canvas, {
+    type: "bar",
+    data: {
+      labels: ["Y1","Y2","Y3","Y4","Y5"],
+      datasets: [{ label:"Revenue (€M)", data:projData, backgroundColor:"#D4A853", borderRadius:4 }]
+    },
+    options: { responsive:true, plugins:{legend:{display:false}}, scales:{ x:{ticks:{color:"#5A5A66",font:{size:11}},grid:{display:false}}, y:{ticks:{color:"#5A5A66",font:{size:11}},grid:{color:"#2A2A3240"}} } }
+  });
+  activeCharts.push(projChart);
+}
+
+// ============================================================
+// DEMO 4: SPRINT BOARD
+// ============================================================
+let sprintTasks = [
+  { id:1, title:"API integration for learning module", pts:5, pri:"high", status:"done" },
+  { id:2, title:"Dashboard filter component", pts:3, pri:"medium", status:"done" },
+  { id:3, title:"User onboarding flow redesign", pts:8, pri:"high", status:"review" },
+  { id:4, title:"Excel export functionality", pts:3, pri:"medium", status:"review" },
+  { id:5, title:"SAP BTP connector setup", pts:5, pri:"high", status:"progress" },
+  { id:6, title:"Notification system", pts:3, pri:"low", status:"progress" },
+  { id:7, title:"Performance optimization", pts:5, pri:"medium", status:"todo" },
+  { id:8, title:"Accessibility audit", pts:2, pri:"low", status:"todo" },
+  { id:9, title:"Localization (DE/EN)", pts:5, pri:"medium", status:"todo" },
+];
+
+const COL_LABELS = { todo:"To Do", progress:"In Progress", review:"In Review", done:"Done" };
+const COL_COLORS = { todo:"#8A8A96", progress:"#5B8DEF", review:"#FB923C", done:"#4ADE80" };
+const PRI_COLORS = { high:"#F87171", medium:"#FB923C", low:"#8A8A96" };
+
+function getSprintHTML() {
+  return `
+  <div class="demo-container">
+    <div class="demo-header">
+      <div>
+        <h4>Sprint 14 — AI Learning Platform</h4>
+        <span style="font-size:12px;color:var(--muted)">Mar 3 – Mar 14, 2026 · 39 points · Day 8/10</span>
+      </div>
+      <div class="tab-group">
+        <button class="tab-btn active" id="boardViewBtn" onclick="switchSprintView('board')">Board</button>
+        <button class="tab-btn" id="burnViewBtn" onclick="switchSprintView('burndown')">Burndown</button>
+      </div>
+    </div>
+    <div class="kpi-row" id="sprintKPIs"></div>
+    <div id="sprintBoardView"></div>
+    <div id="sprintBurnView" style="display:none">
+      <div class="chart-full"><div class="chart-title">Sprint Burndown (Story Points)</div><canvas id="burnChart" height="220"></canvas></div>
+    </div>
+  </div>`;
+}
+
+function initSprint() {
+  sprintTasks = [
+    { id:1, title:"API integration for learning module", pts:5, pri:"high", status:"done" },
+    { id:2, title:"Dashboard filter component", pts:3, pri:"medium", status:"done" },
+    { id:3, title:"User onboarding flow redesign", pts:8, pri:"high", status:"review" },
+    { id:4, title:"Excel export functionality", pts:3, pri:"medium", status:"review" },
+    { id:5, title:"SAP BTP connector setup", pts:5, pri:"high", status:"progress" },
+    { id:6, title:"Notification system", pts:3, pri:"low", status:"progress" },
+    { id:7, title:"Performance optimization", pts:5, pri:"medium", status:"todo" },
+    { id:8, title:"Accessibility audit", pts:2, pri:"low", status:"todo" },
+    { id:9, title:"Localization (DE/EN)", pts:5, pri:"medium", status:"todo" },
+  ];
+  renderSprint();
+}
+
+function renderSprint() {
+  const total = sprintTasks.reduce((s,t) => s + t.pts, 0);
+  const done = sprintTasks.filter(t => t.status === "done").reduce((s,t) => s + t.pts, 0);
+  const vel = Math.round((done/total)*100);
+
+  document.getElementById("sprintKPIs").innerHTML = `
+    <div class="kpi-card"><div class="kpi-label">Velocity</div><div class="kpi-value" style="color:${vel>=60?"var(--green)":"var(--orange)"}">${vel}%</div></div>
+    <div class="kpi-card"><div class="kpi-label">Done</div><div class="kpi-value" style="color:var(--green)">${done}/${total} pts</div></div>
+    <div class="kpi-card"><div class="kpi-label">Blocked</div><div class="kpi-value" style="color:var(--muted)">0</div></div>
+  `;
+
+  const cols = ["todo","progress","review","done"];
+  let html = '<div class="kanban-grid">';
+  cols.forEach(col => {
+    const tasks = sprintTasks.filter(t => t.status === col);
+    const nextCol = cols[cols.indexOf(col) + 1];
+    html += `<div>
+      <div class="kanban-col-header">
+        <div class="dot" style="background:${COL_COLORS[col]}"></div>
+        <span>${COL_LABELS[col]}</span>
+        <span class="count">${tasks.length}</span>
+      </div>`;
+    tasks.forEach(t => {
+      html += `<div class="kanban-card" style="border-left:3px solid ${PRI_COLORS[t.pri]}">
+        <div class="title">${t.title}</div>
+        <div class="meta">
+          <span class="pts">${t.pts} pts</span>
+          ${col !== "done" ? `<button class="kanban-move" onclick="moveTask(${t.id},'${nextCol}')">→</button>` : ""}
+        </div>
+      </div>`;
+    });
+    html += "</div>";
+  });
+  html += "</div>";
+  document.getElementById("sprintBoardView").innerHTML = html;
+}
+
+function moveTask(id, newStatus) {
+  sprintTasks = sprintTasks.map(t => t.id === id ? {...t, status:newStatus} : t);
+  renderSprint();
+}
+
+let burnChart = null;
+function switchSprintView(view) {
+  const boardBtn = document.getElementById("boardViewBtn");
+  const burnBtn = document.getElementById("burnViewBtn");
+  const boardView = document.getElementById("sprintBoardView");
+  const burnView = document.getElementById("sprintBurnView");
+
+  if (view === "board") {
+    boardBtn.classList.add("active"); burnBtn.classList.remove("active");
+    boardView.style.display = ""; burnView.style.display = "none";
+  } else {
+    burnBtn.classList.add("active"); boardBtn.classList.remove("active");
+    boardView.style.display = "none"; burnView.style.display = "";
+
+    if (burnChart) { burnChart.destroy(); activeCharts = activeCharts.filter(c => c !== burnChart); }
+    const canvas = document.getElementById("burnChart");
+    if (!canvas) return;
+    burnChart = new Chart(canvas, {
+      type: "line",
+      data: {
+        labels: ["D1","D2","D3","D4","D5","D6","D7","D8","D9","D10"],
+        datasets: [
+          { label:"Ideal", data:[39,35,31,27,23,19,16,12,8,4], borderColor:"#5A5A66", borderDash:[6,4], pointRadius:0, fill:false, tension:.2 },
+          { label:"Actual", data:[39,37,34,30,25,22,18,14,null,null], borderColor:"#D4A853", backgroundColor:"rgba(212,168,83,.08)", fill:true, pointRadius:3, pointBackgroundColor:"#D4A853", tension:.2, spanGaps:false }
+        ]
+      },
+      options: { responsive:true, plugins:{ legend:{ position:"top", labels:{color:"#8A8A96",font:{size:11},usePointStyle:true} } }, scales:{ x:{ticks:{color:"#5A5A66",font:{size:11}},grid:{color:"#2A2A3220"}}, y:{ticks:{color:"#5A5A66",font:{size:11}},grid:{color:"#2A2A3240"}} } }
+    });
+    activeCharts.push(burnChart);
+  }
+}
+
+// ============================================================
+// SCROLL NAV
+// ============================================================
+window.addEventListener("scroll", () => {
+  document.getElementById("navbar").classList.toggle("scrolled", window.scrollY > 50);
+});
+
+// Intersection Observer for fade-up
+const observer = new IntersectionObserver(entries => {
+  entries.forEach(e => { if (e.isIntersecting) e.target.classList.add("fade-up"); });
+}, { threshold: 0.1 });
+document.querySelectorAll(".section").forEach(s => observer.observe(s));
+</script>
+</body>
+</html>
